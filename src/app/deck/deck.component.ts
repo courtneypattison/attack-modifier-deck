@@ -2,7 +2,27 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { CardType } from '../card-type.model';
 
-import { DeckService } from '../deck.service';
+import { Deck } from '../deck.model';
+
+const RyansDeck = [
+  CardType.Double, CardType.Null,
+  "-2",
+  "-1", "-1", "-1",   
+  "0", "0", "0", "0", "0", "0", 
+  "+1", "+1", "+1", "+1", "+1", "+1", "+1", "+1", "+1", "+1", "+1", 
+  "+1, hurt",
+  "+2"
+];
+
+const CourtneysDeck = [
+  "+2, muddle", "+2",
+  "0", "0",
+  "+1", "+1", "+1", "+1", "+1", "+1", "+1", "+1",
+  CardType.Double,
+  CardType.Null,
+  "-1", "-1",
+  "-2"
+  ];
 
 @Component({
   selector: 'amd-deck',
@@ -11,9 +31,10 @@ import { DeckService } from '../deck.service';
 })
 export class DeckComponent implements OnInit {
 
-  constructor(private deckService: DeckService) { }
+  constructor() { }
 
   ngOnInit() {
+    this.deck = new Deck(this.playerId === 'Courtney' ? CourtneysDeck : RyansDeck);
     this.update();
   }
 
@@ -22,42 +43,43 @@ export class DeckComponent implements OnInit {
   shouldShuffle: string;
   cursed: string;
   blessed: string;
+  deck: Deck;
 
 
   draw() {
-    this.deckService.draw();
+    this.deck.draw();
     this.update();
   }
   
   shuffle() {
-    this.deckService.shuffle();
+    this.deck.shuffle();
     this.update();
   }
 
   curse() {
-    this.deckService.curse();
+    this.deck.curse();
     this.update();
   }
 
   bless() {
-    this.deckService.bless();
+    this.deck.bless();
     this.update();
   }
   
   update() {
-    this.card = this.deckService.card;
-    this.shouldShuffle = this.deckService.shouldShuffle ? 'refresh' : '';
+    this.card = this.deck.card;
+    this.shouldShuffle = this.deck.shouldShuffle ? 'refresh' : '';
     this.update_bless();
     this.update_curse();
   }
 
   update_bless() {
-    const count = this.deckService.count(CardType.Bless);
+    const count = this.deck.count(CardType.Bless);
     this.blessed = "Bless" + (count > 0 ? " (" + String(count) + ")" : '');
   }
 
   update_curse() {
-    const count = this.deckService.count(CardType.Curse);
+    const count = this.deck.count(CardType.Curse);
     this.cursed = "Curse" + (count > 0 ? " (" + String(count) + ")" : '');
   }
 }

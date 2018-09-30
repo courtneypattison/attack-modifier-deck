@@ -1,25 +1,11 @@
-import { Injectable } from '@angular/core';
-
 import { CardType } from './card-type.model';
 
 const Reshuffle = [CardType.Curse, CardType.Bless, CardType.Null, CardType.Double]; 
-const RyansDeck = [
-  CardType.Double, CardType.Null,
-  "-2",
-  "-1", "-1", "-1",   
-  "0", "0", "0", "0", "0", "0", 
-  "+1", "+1", "+1", "+1", "+1", "+1", "+1", "+1", "+1", "+1", "+1", 
-  "+1, hurt",
-  "+2"
-];
 
-@Injectable({
-  providedIn: 'root'
-})
-export class DeckService {
+export class Deck {
 
-  constructor() {
-    this.deck = RyansDeck;
+  constructor(private playerDeck: string[]) {
+    this.deck = playerDeck;
     this.inPlay = [];
     this.playOnce = [];
     this.card = '';
