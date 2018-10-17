@@ -14,6 +14,7 @@ export class DeckComponent implements OnInit {
 
   @Input() playerId: string;
   card: string;
+  size: number;
   shouldShuffle: string;
   cursed: string;
   blessed: string;
@@ -54,6 +55,7 @@ export class DeckComponent implements OnInit {
 
   update() {
     this.card = this.deck.card === '' ? '.' : this.deck.card;
+    this.size = this.deck.size();
     this.shouldShuffle = this.deck.shouldShuffle ? 'refresh' : '';
     this.blessed = this.updateAddIn(CardType.Bless);
     this.cursed = this.updateAddIn(CardType.Curse);

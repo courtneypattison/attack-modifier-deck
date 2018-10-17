@@ -9,6 +9,7 @@ export class Deck {
     this.inPlay = [];
     this.playOnce = [];
     this.card = '';
+    this.shuffle();
   }
 
   private inPlay: string[];
@@ -17,11 +18,11 @@ export class Deck {
   card: string;
   shouldShuffle: boolean;
 
-  getRandomInt(max) {
+  private getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
-  pickRandom() {
+  private pickRandom() {
     const index = this.getRandomInt(this.size());
     if (index >= this.inPlay.length) {
       const i = index - this.inPlay.length;
@@ -49,11 +50,11 @@ export class Deck {
     }
   }
 
-  addPlayOnce(card: string) {
+  private addPlayOnce(card: string) {
     this.playOnce.push(card);
   }
 
-  addScenarioCard(card: string) {
+  private addScenarioCard(card: string) {
     this.deck.push(card);
     this.inPlay.push(card);
   }
@@ -88,6 +89,6 @@ export class Deck {
   }
 
   addNegativeOne() {
-    this.addPlayOnce(CardType.NegativeOne);
+    this.addScenarioCard(CardType.NegativeOne);
   }
 }

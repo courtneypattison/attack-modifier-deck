@@ -1,6 +1,7 @@
 <div class="col col-xs-2">
   <div class="row">{{playerId}}</div>
   <div class="row card">{{card}}</div>
+  <div class="row size">{{size}}</div>
   <input type="button" class="row btn btn-warning btn-lg" (click)="draw()" value="Draw" />
   <input type="button" class="row btn btn-default btn-lg" (click)="shuffle()" value="Shuffle"  *ngIf="!shouldShuffle; else shouldntShuffle"/>
   <ng-template #shouldntShuffle><input type="button" class="row btn btn-danger btn-lg" (click)="shuffle()" value="Shuffle" /></ng-template>
