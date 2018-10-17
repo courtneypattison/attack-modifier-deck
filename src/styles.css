@@ -1,4 +1,16 @@
 body {
   background: #3e2723;
   color: #fff;
+  font-family: 'Merienda';
+  font-size: 2em;
+}
+
+.btn {
+  width: 100%;
+}
+
+.card {
+  width: 100%;
+  text-align: center;
+  font-size: 2.5em;
 }

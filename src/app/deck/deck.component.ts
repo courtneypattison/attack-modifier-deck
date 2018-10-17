@@ -12,6 +12,14 @@ import { Deck } from '../deck.model';
 })
 export class DeckComponent implements OnInit {
 
+  @Input() playerId: string;
+  card: string;
+  shouldShuffle: string;
+  cursed: string;
+  blessed: string;
+  negativeOne: string;
+  deck: Deck;
+
   constructor() { }
 
   ngOnInit() {
@@ -19,19 +27,11 @@ export class DeckComponent implements OnInit {
     this.update();
   }
 
-  @Input() playerId: string;
-  card: string;
-  shouldShuffle: string;
-  cursed: string;
-  blessed: string;
-  deck: Deck;
-
-
   draw() {
     this.deck.draw();
     this.update();
   }
-  
+
   shuffle() {
     this.deck.shuffle();
     this.update();
@@ -46,21 +46,22 @@ export class DeckComponent implements OnInit {
     this.deck.bless();
     this.update();
   }
-  
+
+  addNegativeOne() {
+    this.deck.addNegativeOne();
+    this.update();
+  }
+
   update() {
-    this.card = this.deck.card;
+    this.card = this.deck.card === '' ? '.' : this.deck.card;
     this.shouldShuffle = this.deck.shouldShuffle ? 'refresh' : '';
-    this.update_bless();
-    this.update_curse();
+    this.blessed = this.updateAddIn(CardType.Bless);
+    this.cursed = this.updateAddIn(CardType.Curse);
+    this.negativeOne = this.updateAddIn(CardType.NegativeOne);
   }
 
-  update_bless() {
-    const count = this.deck.count(CardType.Bless);
-    this.blessed = "Bless" + (count > 0 ? " (" + String(count) + ")" : '');
-  }
-
-  update_curse() {
-    const count = this.deck.count(CardType.Curse);
-    this.cursed = "Curse" + (count > 0 ? " (" + String(count) + ")" : '');
+  updateAddIn(cardType: CardType): string {
+    const count = this.deck.count(cardType);
+    return `${cardType} ${count > 0 ? `(${count})` : ''}`;
   }
 }

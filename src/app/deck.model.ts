@@ -1,6 +1,6 @@
 import { CardType } from './card-type.model';
 
-const Reshuffle = [CardType.Curse, CardType.Bless, CardType.Null, CardType.Double]; 
+const Reshuffle = [CardType.Curse, CardType.Bless, CardType.Null, CardType.Double];
 
 export class Deck {
 
@@ -11,16 +11,6 @@ export class Deck {
     this.card = '';
   }
 
-  courtney_deck = [
-    "+2, muddle", "+2",
-    "0", "0",
-    "+1", "+1", "+1", "+1", "+1", "+1", "+1", "+1",
-    CardType.Double,
-    CardType.Null,
-    "-1", "-1",
-    "-2"
-    ];
-
   private inPlay: string[];
   private deck: string[];
   private playOnce: string[];
@@ -29,7 +19,7 @@ export class Deck {
 
   getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
-  }	  
+  }
 
   pickRandom() {
     const index = this.getRandomInt(this.size());
@@ -50,7 +40,7 @@ export class Deck {
   }
 
   draw() {
-    if (this.size() == 0) {
+    if (this.size() === 0) {
       this.shuffle();
     }
     this.card = this.pickRandom();
@@ -69,20 +59,20 @@ export class Deck {
   }
 
   shuffle() {
-    this.card = "";
+    this.card = '';
     this.shouldShuffle = false;
     this.inPlay = this.deck.slice(0);
   }
 
   count(card: string) {
     let count = 0;
-    for (let i in this.playOnce) {
-      if (this.playOnce[i] == card) {
+    for (const i in this.playOnce) {
+      if (this.playOnce[i] === card) {
         count++;
       }
     }
-    for (let i in this.inPlay) {
-      if (this.inPlay[i] == card) {
+    for (const i in this.inPlay) {
+      if (this.inPlay[i] === card) {
         count++;
       }
     }
@@ -95,5 +85,9 @@ export class Deck {
 
   curse() {
     this.addPlayOnce(CardType.Curse);
+  }
+
+  addNegativeOne() {
+    this.addPlayOnce(CardType.NegativeOne);
   }
 }
