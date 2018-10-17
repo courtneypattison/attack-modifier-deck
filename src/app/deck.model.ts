@@ -88,7 +88,7 @@ export class Deck {
     this.addPlayOnce(CardType.Curse);
   }
 
-  addNegativeOne() {
-    this.addScenarioCard(CardType.NegativeOne);
+  addMinusOne() {
+    this.addScenarioCard(CardType.MinusOne);
   }
 }

@@ -18,7 +18,7 @@ export class DeckComponent implements OnInit {
   shouldShuffle: string;
   cursed: string;
   blessed: string;
-  negativeOne: string;
+  minusOne: string;
   deck: Deck;
 
   constructor() { }
@@ -49,7 +49,7 @@ export class DeckComponent implements OnInit {
   }
 
   addNegativeOne() {
-    this.deck.addNegativeOne();
+    this.deck.addMinusOne();
     this.update();
   }
 
@@ -59,7 +59,7 @@ export class DeckComponent implements OnInit {
     this.shouldShuffle = this.deck.shouldShuffle ? 'refresh' : '';
     this.blessed = this.updateAddIn(CardType.Bless);
     this.cursed = this.updateAddIn(CardType.Curse);
-    this.negativeOne = this.updateAddIn(CardType.NegativeOne);
+    this.minusOne = this.updateAddIn(CardType.MinusOne);
   }
 
   updateAddIn(cardType: CardType): string {
