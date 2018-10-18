@@ -48,7 +48,7 @@ export class DeckComponent implements OnInit {
     this.update();
   }
 
-  addNegativeOne() {
+  addMinusOne() {
     this.deck.addMinusOne();
     this.update();
   }
@@ -59,7 +59,7 @@ export class DeckComponent implements OnInit {
     this.shouldShuffle = this.deck.shouldShuffle ? 'refresh' : '';
     this.blessed = this.updateAddIn(CardType.Bless);
     this.cursed = this.updateAddIn(CardType.Curse);
-    this.minusOne = this.updateAddIn(CardType.MinusOne);
+    this.minusOne = this.updateAddIn(CardType.ScenarioMinusOne);
   }
 
   updateAddIn(cardType: CardType): string {
