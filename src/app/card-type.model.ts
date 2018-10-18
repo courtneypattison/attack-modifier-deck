@@ -1,7 +1,8 @@
 export enum CardType {
   Curse = 'Curse',
   Bless = 'Bless',
-  MinusOne = 'Minus one',
-  Null = 'Nullify',
+  MinusOne = '-1',
+  Null = 'Null',
   Double = '2X',
+  ScenarioMinusOne = '-1*',
 }
