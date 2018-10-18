@@ -89,6 +89,6 @@ export class Deck {
   }
 
   addMinusOne() {
-    this.addScenarioCard(CardType.MinusOne);
+    this.addScenarioCard(CardType.ScenarioMinusOne);
   }
 }
