@@ -12,7 +12,7 @@ export const RyansDeck = [
 ];
 
 export const CourtneysDeck = [
-  '+2, muddle', '+2, muddle', '+2',
+  '+2?', '+2?', '+2',
   '+0', '+0',
   '+1', '+1', '+1', '+1', '+1', '+1', '+1', '+1',
   CardType.Double,
