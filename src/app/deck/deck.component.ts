@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { CardType } from '../card-type.model';
-import { CourtneysDeck, RyansDeck } from '../player-decks.model';
-
-import { Deck } from '../deck.model';
+import { DeckService } from '../deck.service';
+import { DeckState } from '../deck-state.model';
 
 @Component({
   selector: 'amd-deck',
@@ -12,58 +10,34 @@ import { Deck } from '../deck.model';
 })
 export class DeckComponent implements OnInit {
 
-  @Input() playerId: string;
-  card: string;
-  size: number;
-  shouldShuffle: string;
-  cursed: string;
-  blessed: string;
-  minusOne: string;
-  deck: Deck;
+  @Input() characterClass: string;
+  deckState: DeckState;
 
-  constructor() { }
+  constructor(private deckService: DeckService) { }
 
   ngOnInit() {
-    this.deck = new Deck(this.playerId === 'Courtney' ? CourtneysDeck : RyansDeck);
-    this.update();
+    this.deckService.getDeckState(this.characterClass).subscribe((deckState: DeckState) => {
+      this.deckState = deckState;
+    });
   }
 
   draw() {
-    this.deck.draw();
-    this.update();
+    this.deckService.draw(this.characterClass);
   }
 
   shuffle() {
-    this.deck.shuffle();
-    this.update();
+    this.deckService.shuffle(this.characterClass);
   }
 
   curse() {
-    this.deck.curse();
-    this.update();
+    this.deckService.curse(this.characterClass);
   }
 
   bless() {
-    this.deck.bless();
-    this.update();
+    this.deckService.bless(this.characterClass);
   }
 
   addMinusOne() {
-    this.deck.addMinusOne();
-    this.update();
-  }
-
-  update() {
-    this.card = this.deck.card === '' ? '.' : this.deck.card;
-    this.size = this.deck.size();
-    this.shouldShuffle = this.deck.shouldShuffle ? 'refresh' : '';
-    this.blessed = this.updateAddIn(CardType.Bless);
-    this.cursed = this.updateAddIn(CardType.Curse);
-    this.minusOne = this.updateAddIn(CardType.ScenarioMinusOne);
-  }
-
-  updateAddIn(cardType: CardType): string {
-    const count = this.deck.count(cardType);
-    return `${cardType} ${count > 0 ? `(${count})` : ''}`;
+    this.deckService.addMinusOne(this.characterClass);
   }
 }

@@ -1,6 +1,6 @@
 import { CardType } from './card-type.model';
 
-export const RyansDeck = [
+export const SpellweaverDeck = [
   CardType.Double,
   CardType.Null,
   '-2',
@@ -11,7 +11,7 @@ export const RyansDeck = [
   '+2'
 ];
 
-export const CourtneysDeck = [
+export const CragheartDeck = [
   '+2?', '+2?', '+2',
   '+0', '+0',
   '+1', '+1', '+1', '+1', '+1', '+1', '+1', '+1',

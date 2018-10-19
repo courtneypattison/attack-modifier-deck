@@ -4,18 +4,18 @@ const Reshuffle = [CardType.Curse, CardType.Bless, CardType.Null, CardType.Doubl
 
 export class Deck {
 
-  constructor(private playerDeck: string[]) {
-    this.deck = playerDeck;
-    this.inPlay = [];
-    this.playOnce = [];
-    this.card = '';
+  constructor(private deck: string[]) {
+    this.playerDeck = deck;
+    this.inPlayDeck = [];
+    this.playOnceDeck = [];
+    this.currentCard = '';
     this.shuffle();
   }
 
-  private inPlay: string[];
-  private deck: string[];
-  private playOnce: string[];
-  card: string;
+  private inPlayDeck: string[];
+  private playerDeck: string[];
+  private playOnceDeck: string[];
+  currentCard: string;
   shouldShuffle: boolean;
 
   private getRandomInt(max) {
@@ -24,56 +24,56 @@ export class Deck {
 
   private pickRandom() {
     const index = this.getRandomInt(this.size());
-    if (index >= this.inPlay.length) {
-      const i = index - this.inPlay.length;
-      const value = this.playOnce[i];
-      this.playOnce.splice(i, 1);
+    if (index >= this.inPlayDeck.length) {
+      const i = index - this.inPlayDeck.length;
+      const value = this.playOnceDeck[i];
+      this.playOnceDeck.splice(i, 1);
       return value;
     } else {
-      const value = this.inPlay[index];
-      this.inPlay.splice(index, 1);
+      const value = this.inPlayDeck[index];
+      this.inPlayDeck.splice(index, 1);
       return value;
     }
   }
 
   size() {
-    return this.inPlay.length + this.playOnce.length;
+    return this.inPlayDeck.length + this.playOnceDeck.length;
   }
 
   draw() {
     if (this.size() === 0) {
       this.shuffle();
     }
-    this.card = this.pickRandom();
-    if (Reshuffle.findIndex(o => this.card.startsWith(o)) >= 0) {
+    this.currentCard = this.pickRandom();
+    if (Reshuffle.findIndex(o => this.currentCard.startsWith(o)) >= 0) {
       this.shouldShuffle = true;
     }
   }
 
-  private addPlayOnce(card: string) {
-    this.playOnce.push(card);
+  private addplayOnceDeck(currentCard: string) {
+    this.playOnceDeck.push(currentCard);
   }
 
-  private addScenarioCard(card: string) {
-    this.deck.push(card);
-    this.inPlay.push(card);
+  private addScenariocurrentCard(currentCard: string) {
+    this.playerDeck.push(currentCard);
+    this.inPlayDeck.push(currentCard);
   }
 
   shuffle() {
-    this.card = '';
+    this.currentCard = '';
     this.shouldShuffle = false;
-    this.inPlay = this.deck.slice(0);
+    this.inPlayDeck = this.playerDeck.slice(0);
   }
 
-  count(card: string) {
+  count(currentCard: string) {
     let count = 0;
-    for (const i in this.playOnce) {
-      if (this.playOnce[i] === card) {
+    for (const i in this.playOnceDeck) {
+      if (this.playOnceDeck[i] === currentCard) {
         count++;
       }
     }
-    for (const i in this.inPlay) {
-      if (this.inPlay[i] === card) {
+    for (const i in this.inPlayDeck) {
+      if (this.inPlayDeck[i] === currentCard) {
         count++;
       }
     }
@@ -81,14 +81,14 @@ export class Deck {
   }
 
   bless() {
-    this.addPlayOnce(CardType.Bless);
+    this.addplayOnceDeck(CardType.Bless);
   }
 
   curse() {
-    this.addPlayOnce(CardType.Curse);
+    this.addplayOnceDeck(CardType.Curse);
   }
 
   addMinusOne() {
-    this.addScenarioCard(CardType.ScenarioMinusOne);
+    this.addScenariocurrentCard(CardType.ScenarioMinusOne);
   }
 }

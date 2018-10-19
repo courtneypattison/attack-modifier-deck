@@ -1,13 +1,13 @@
 <div class="col col-xs-6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
   <div class="row">
     <span>{{playerId}}</span> 
-    <span>{{size}}</span>
+    <span>{{deckState.currentSize}}</span>
   </div>
-  <div class="row card">{{card}}</div>
+  <div class="row card">{{deckState.currentCard}}</div>
   <input type="button" class="row btn btn-warning btn-lg" (click)="draw()" value="Draw" />
-  <input type="button" class="row btn btn-default btn-lg" (click)="shuffle()" value="Shuffle"  *ngIf="!shouldShuffle; else shouldntShuffle"/>
+  <input type="button" class="row btn btn-default btn-lg" (click)="shuffle()" value="Shuffle"  *ngIf="!deckState.shouldShuffle; else shouldntShuffle"/>
   <ng-template #shouldntShuffle><input type="button" class="row btn btn-danger btn-lg" (click)="shuffle()" value="Shuffle" /></ng-template>
-  <input type="button" class="row btn btn-default btn-lg" (click)="curse()" value={{cursed}}/>
-  <input type="button" class="row btn btn-default btn-lg" (click)="bless()" value={{blessed}}/>
-  <input type="button" class="row btn btn-default btn-lg" (click)="addMinusOne()" value={{minusOne}}/>
+  <input type="button" class="row btn btn-default btn-lg" (click)="curse()" value="Curse ({{deckState.curseCount}})"/>
+  <input type="button" class="row btn btn-default btn-lg" (click)="bless()" value="Bless ({{deckState.blessCount}})"/>
+  <input type="button" class="row btn btn-default btn-lg" (click)="addMinusOne()" value="Minus one ({{deckState.minusOneCount}})"/>
 </div>
