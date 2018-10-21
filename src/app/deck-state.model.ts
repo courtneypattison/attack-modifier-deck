@@ -3,6 +3,6 @@ export interface DeckState {
   scenarioDeck: string[];
   inPlayDeck: string[];
   playOnceDeck: string[];
-  currentCard: string;
+  drawnCard: string;
   shouldShuffle: boolean;
 }
