@@ -83,7 +83,9 @@ export class DeckService {
 
   private pickRandom(characterClass: string, deckState: DeckState) {
     const index = this.getRandomInt(this.size(deckState));
-    if (index >= deckState.inPlayDeck.length) {
+    if (index === 0) {
+      return '.';
+    } else if (index >= deckState.inPlayDeck.length) {
       const i = index - deckState.inPlayDeck.length;
       const value = deckState.playOnceDeck[i];
       deckState.playOnceDeck.splice(i, 1);

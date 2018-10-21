@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { CardType } from '../card-type.model';
-import { CragheartDeck, SpellweaverDeck } from '../character-decks.model';
-import { DeckService } from '../deck.service';
-import { DeckState } from '../deck-state.model';
+import { CardType } from './shared/card-type.model';
+import { CragheartDeck, SpellweaverDeck } from './shared/character-decks.model';
+import { DeckService } from './shared/deck.service';
+import { DeckState } from './shared/deck-state.model';
 
 @Component({
   selector: 'amd-deck',
