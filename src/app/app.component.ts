@@ -6,7 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'amd';
-  player1 = 'Cragheart';
-  player2 = 'Spellweaver';
+  characters = ['Cragheart', 'Spellweaver'];
 }

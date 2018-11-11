@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { CardType } from './shared/card-type.model';
-import { CragheartDeck, SpellweaverDeck } from './shared/character-decks.model';
 import { DeckService } from './shared/deck.service';
 import { DeckState } from './shared/deck-state.model';
 
@@ -18,10 +17,17 @@ export class DeckComponent implements OnInit {
   blessButtonValue: string;
   curseButtonValue: string;
   minusOneButtonValue: string;
+  clickAnimation: boolean;
 
   constructor(private deckService: DeckService) { }
 
   ngOnInit() {
+    this.setDefaultState();
+    this.getDeckState();
+  }
+
+  setDefaultState() {
+    this.clickAnimation = false;
     this.deckState = {
       characterDeck: [],
       scenarioDeck: [],
@@ -33,27 +39,22 @@ export class DeckComponent implements OnInit {
     this.curseButtonValue = 'Curse';
     this.blessButtonValue = 'Bless';
     this.minusOneButtonValue = '-1*';
-
-    this.deckService.addCharacterDeck('Cragheart', CragheartDeck)
-      .then(() => {
-        this.deckService.shuffle('Cragheart');
-        this.deckService.addCharacterDeck('Spellweaver', SpellweaverDeck)
-          .then(() => {
-            this.deckService.shuffle('Spellweaver');
-            this.deckService.getDeckState(this.characterClass)
-              .subscribe((deckState: DeckState) => {
-                this.deckState = deckState;
-                this.activeDeckSize = this.deckService.size(deckState);
-                this.blessButtonValue = this.deckService.getAddInValue(deckState, CardType.Bless);
-                this.curseButtonValue = this.deckService.getAddInValue(deckState, CardType.Curse);
-                this.minusOneButtonValue = this.deckService.getAddInValue(deckState, CardType.ScenarioMinusOne);
-              });
-          });
-      });
   }
 
-  draw() {
-    this.deckService.draw(this.characterClass);
+  getDeckState() {
+    this.deckService.getDeckState(this.characterClass).subscribe((deckState: DeckState) => {
+      this.deckState = deckState;
+      this.activeDeckSize = this.deckService.size(deckState);
+      this.blessButtonValue = this.deckService.getAddInValue(deckState, CardType.Bless);
+      this.curseButtonValue = this.deckService.getAddInValue(deckState, CardType.Curse);
+      this.minusOneButtonValue = this.deckService.getAddInValue(deckState, CardType.ScenarioMinusOne);
+    });
+  }
+
+  drawCard() {
+    this.deckService.drawCard(this.characterClass);
+    this.clickAnimation = true;
+    delay(1000).then(() => this.clickAnimation = false);
   }
 
   shuffle() {
@@ -71,4 +72,8 @@ export class DeckComponent implements OnInit {
   addMinusOne() {
     this.deckService.addMinusOne(this.characterClass);
   }
+}
+
+async function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }

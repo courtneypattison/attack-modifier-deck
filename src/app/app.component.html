@@ -1,2 +1,2 @@
-<amd-deck [characterClass]="player1"></amd-deck>
-<amd-deck [characterClass]="player2"></amd-deck>
+<amd-deck *ngFor="let character of characters" [characterClass]="character"></amd-deck>
+<amd-scenario></amd-scenario>

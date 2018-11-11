@@ -7,11 +7,13 @@ import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { DeckComponent } from './deck/deck.component';
+import { ScenarioComponent } from './scenario/scenario.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DeckComponent
+    DeckComponent,
+    ScenarioComponent
   ],
   imports: [
     BrowserModule,
