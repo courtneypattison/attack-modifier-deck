@@ -6,9 +6,11 @@ import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 import { CardType } from './card-type.model';
-
+import { CardTypeCounts } from './card-type-counts.model';
+import { CharacterPerks } from './character-perks.model'
 import { DeckState } from './deck-state.model';
 import { Reshuffle } from './reshuffle.model';
+import { StandardAttackModifierDeck } from './standard-attack-modifier-deck';
 
 
 @Injectable({
@@ -20,18 +22,48 @@ export class DeckService {
 
   constructor(private angularFirestore: AngularFirestore) { }
 
-  addCharacterDeck(characterClass: string, characterDeck: string[]): Promise<void> {
-    console.log(`addCharacterDeck(): characterClass: ${characterClass} characterDeck: ${characterDeck}`);
+  private buildDeck(characterClass: string): string[] {
+    let cardTypeCounts = { ...StandardAttackModifierDeck };
+    let perks = CharacterPerks[characterClass];
+
+    for (let perk of perks) {
+      for (let card in perk.deckModifier) {
+        const delta =  perk.activeCount * perk.deckModifier[card];
+        if (card in cardTypeCounts) {
+          cardTypeCounts[card] += delta;
+        } else {
+          cardTypeCounts[card] = delta;
+        }
+      }
+    }
+
+    let deck = [];
+
+    for (let card in cardTypeCounts) {
+      for (let i = 0; i < cardTypeCounts[card]; i++) {
+        deck.push(card);
+      }
+    }
+
+    return deck;
+  }
+
+  addCharacterDeck(characterClass: string): Promise<void> {
+    console.log(`addCharacterDeck(): characterClass: ${characterClass}`);
+    let characterDeck = this.buildDeck(characterClass);
 
     return this.angularFirestore
       .doc<DeckState>(`characters/${characterClass}`)
       .set({
         characterDeck: characterDeck,
+        characterPerks: CharacterPerks[characterClass],
         scenarioDeck: characterDeck,
         inPlayDeck: [],
         playOnceDeck: [],
         drawnCard: '.',
         shouldShuffle: false,
+      }).then(() => {
+        this.shuffle(characterClass);
       });
   }
 

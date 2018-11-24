@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CardType } from './shared/card-type.model';
 import { DeckService } from './shared/deck.service';
 import { DeckState } from './shared/deck-state.model';
+import { Perk } from './shared/perk.model';
 
 @Component({
   selector: 'amd-deck',
@@ -30,6 +31,7 @@ export class DeckComponent implements OnInit {
     this.clickAnimation = false;
     this.deckState = {
       characterDeck: [],
+      characterPerks: [],
       scenarioDeck: [],
       inPlayDeck: [],
       playOnceDeck: [],
@@ -71,6 +73,10 @@ export class DeckComponent implements OnInit {
 
   addMinusOne() {
     this.deckService.addMinusOne(this.characterClass);
+  }
+
+  editPerks() {
+    
   }
 }
 
