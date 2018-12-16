@@ -9,8 +9,7 @@ export class ScenarioService {
 
   constructor(private deckService: DeckService) { }
 
-  newScenario() {
-    this.deckService.addCharacterDeck('Cragheart');
-    this.deckService.addCharacterDeck('Spellweaver');
+  newScenario(characterClass: string) {
+    this.deckService.addCharacterDeck(characterClass);
   }
 }

@@ -32,11 +32,40 @@ const CragheartPerks = [
   createPerk(2, 'Add one +0 IMMOBILIZE card', 2, { '+1 IMMOBILIZE': 1 }),
   createPerk(2, 'Add one +2 MUDDLE card', 2, { '+2 MUDDLE': 1 }),
   createPerk(1, 'Add two PUSH 2 cards', 1, { 'PUSH 2': 2 }),
-  createPerk(0, 'Add two EARTH cards', 2, { 'EARTH': 2 }),
+  createPerk(1, 'Add two EARTH cards', 2, { 'EARTH': 2 }),
   createPerk(0, 'Add two WIND cards', 1, { 'WIND': 2 }),
+];
+
+const VermlingMindtheifPerks = [
+  createPerk(1, 'Remove two -1 cards', 2, { '+1': -2 }),
+  createPerk(0, 'Remove four +0 cards', 1, { '+0': -4 }),
+  createPerk(0, 'Replace two +1 cards with two +2 cards', 1, { '+1': -2, '+2': 2 }),
+  createPerk(0, 'Replace one -2 cards with one +0 cards', 1, { '-2': -1, '+0': 1 }),
+  createPerk(0, 'Add one +2 ICE card', 2, { '+2 ICE': 1 }),
+  createPerk(0, 'Add two ROLL +1 cards', 2, { 'ROLL +1': 2 }),
+  createPerk(0, 'Add three PULL 1 cards', 1, { 'PULL 1': 3 }),
+  createPerk(0, 'Add three MUDDLE cards', 1, { 'MUDDLE': 3 }),
+  createPerk(0, 'Add two IMMOBILIZE cards', 1, { 'IMMOBILIZE': 2 }),
+  createPerk(0, 'Add one STUN card', 1, { 'STUN': 1 }),
+  createPerk(0, 'Add one DISARM card and one MUDDLE card', 1, { 'DISARM': 1, 'MUDDLE': 1 }),
+];
+
+const InoxBrutePerks = [
+  createPerk(1, 'Remove two -1 cards', 2, { '+1': -2 }),
+  createPerk(0, 'Replace one -1 card with one +1 card', 1, { '-1': -1, '+1': 1 }),
+  createPerk(0, 'Add two +1 cards', 2, { '+1': 2 }),
+  createPerk(0, 'Add one +3 card', 1, { '+3': 1 }),
+  createPerk(0, 'Add three PUSH 1 cards', 2, { 'PUSH 1': 3 }),
+  createPerk(0, 'Add two PIERCE 3 cards', 1, { 'PIERCE': 2 }),
+  createPerk(0, 'Add one STUN card', 2, { 'STUN': 1 }),
+  createPerk(0, 'Add one DISARM card and one MUDDLE card', 1, { 'DISARM': 1, 'MUDDLE': 1 }),
+  createPerk(0, 'Add one ADD TARGET card', 1, { 'ADD TARGET': 1 }),
+  createPerk(0, 'Add one +1 Shield 1, Self card', 1, { '+1 Shield 1, Self': 1 }),
 ];
 
 export const CharacterPerks = {
   Spellweaver: SpellweaverPerks,
   Cragheart: CragheartPerks,
+  VermlingMindtheif: VermlingMindtheifPerks,
+  InoxBrute: InoxBrutePerks,
 }

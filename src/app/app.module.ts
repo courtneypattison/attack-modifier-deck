@@ -13,7 +13,7 @@ import { ScenarioComponent } from './scenario/scenario.component';
   declarations: [
     AppComponent,
     DeckComponent,
-    ScenarioComponent
+    ScenarioComponent,
   ],
   imports: [
     BrowserModule,

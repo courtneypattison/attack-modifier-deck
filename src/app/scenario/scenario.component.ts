@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { ScenarioService } from './shared/scenario.service';
 
@@ -8,6 +8,7 @@ import { ScenarioService } from './shared/scenario.service';
   styleUrls: ['./scenario.component.css']
 })
 export class ScenarioComponent implements OnInit {
+  @Input() characters: string[];
 
   constructor(private scenarioService: ScenarioService) { }
 
@@ -15,7 +16,9 @@ export class ScenarioComponent implements OnInit {
   }
 
   newScenario() {
-    this.scenarioService.newScenario();
+    for (const character of this.characters) {
+      this.scenarioService.newScenario(character);
+    }
   }
 
 }
