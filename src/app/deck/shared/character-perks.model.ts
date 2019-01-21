@@ -50,11 +50,16 @@ const VermlingMindtheifPerks = [
   createPerk(0, 'Add one DISARM card and one MUDDLE card', 1, { 'DISARM': 1, 'MUDDLE': 1 }),
 ];
 
+const QuatrylTinkererPerks = [
+  createPerk(1, 'Remove two -1 cards', 2, { '+1': -2 }),
+  createPerk(1, 'Add one +3 card', 1, { '+3': 1 }),
+];
+
 const InoxBrutePerks = [
   createPerk(1, 'Remove two -1 cards', 2, { '+1': -2 }),
   createPerk(0, 'Replace one -1 card with one +1 card', 1, { '-1': -1, '+1': 1 }),
   createPerk(0, 'Add two +1 cards', 2, { '+1': 2 }),
-  createPerk(0, 'Add one +3 card', 1, { '+3': 1 }),
+  createPerk(1, 'Add one +3 card', 1, { '+3': 1 }),
   createPerk(0, 'Add three PUSH 1 cards', 2, { 'PUSH 1': 3 }),
   createPerk(0, 'Add two PIERCE 3 cards', 1, { 'PIERCE': 2 }),
   createPerk(0, 'Add one STUN card', 2, { 'STUN': 1 }),
@@ -64,8 +69,9 @@ const InoxBrutePerks = [
 ];
 
 export const CharacterPerks = {
-  Spellweaver: SpellweaverPerks,
-  Cragheart: CragheartPerks,
-  VermlingMindtheif: VermlingMindtheifPerks,
-  InoxBrute: InoxBrutePerks,
+  'Spellweaver': SpellweaverPerks,
+  'Cragheart': CragheartPerks,
+  'Vermling Mindtheif': VermlingMindtheifPerks,
+  'Inox Brute': InoxBrutePerks,
+  'Quatryl Tinkerer': QuatrylTinkererPerks,
 }

@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  characters = ['InoxBrute', 'VermlingMindtheif'];
+  characters = ['Inox Brute', 'Quatryl Tinkerer'];
 }
