@@ -15,6 +15,12 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    // @angular/cli and core-js incompatibility workaround https://github.com/zloirock/core-js/issues/412#issuecomment-452649583
+    "paths": {
+      "core-js/es7/reflect": [
+        "node_modules/core-js/proposals/reflect-metadata"
+      ]
+    }
   }
 }
