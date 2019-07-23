@@ -1,14 +1,25 @@
-<div class="col col-xs-6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-  <div class="row">
-    <span>{{characterClass}}</span> 
-    <span>{{activeDeckSize}}</span>
+<div class="d-flex justify-content-between">
+    <div>{{characterClass}}</div>
+    <div>{{activeDeckSize}}</div>
   </div>
-  <div class="row card" [ngClass]="{'click-animation' : clickAnimation}">{{deckState.drawnCard}}</div>
-  <input type="button" class="row btn btn-warning btn-lg" (click)="drawCard()" value="Draw" />
-  <input type="button" class="row btn btn-default btn-lg" (click)="shuffle()" value="Shuffle"  *ngIf="!deckState.shouldShuffle; else shouldntShuffle"/>
-  <ng-template #shouldntShuffle><input type="button" class="row btn btn-danger btn-lg" (click)="shuffle()" value="Shuffle" /></ng-template>
-  <input type="button" class="row btn btn-default btn-lg" (click)="curse()" value="{{curseButtonValue}}"/>
-  <input type="button" class="row btn btn-default btn-lg" (click)="bless()" value="{{blessButtonValue}}"/>
-  <input type="button" class="row btn btn-default btn-lg" (click)="addMinusOne()" value="{{minusOneButtonValue}}"/>
-  
+<div class="card-drawn" [ngClass]="{'click-animation' : clickAnimation}">{{deckState.drawnCard}}</div>
+<div>
+  <input type="button" class="btn btn-warning btn-lg" (click)="drawCard()" value="Draw" />
+</div>
+<div>
+  <input type="button" class="btn btn-light btn-lg" (click)="shuffle()" value="Shuffle"
+    *ngIf="!deckState.shouldShuffle; else shouldntShuffle" />
+</div>
+<div>
+  <ng-template #shouldntShuffle><input type="button" class="btn btn-danger btn-lg" (click)="shuffle()"
+      value="Shuffle" /></ng-template>
+</div>
+<div>
+  <input type="button" class="btn btn-light btn-lg" (click)="curse()" value="{{curseButtonValue}}" />
+</div>
+<div>
+  <input type="button" class="btn btn-light btn-lg" (click)="bless()" value="{{blessButtonValue}}" />
+</div>
+<div>
+  <input type="button" class="btn btn-light btn-lg" (click)="addMinusOne()" value="{{minusOneButtonValue}}" />
 </div>

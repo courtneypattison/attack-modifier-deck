@@ -1,10 +1,8 @@
-.row {
-  margin: 15px 0;
-  display: flex;
-  justify-content: space-between;
+.btn {
+  width: 100%;
 }
 
-.card {
+.card-drawn {
   width: 100%;
   text-align: center;
   font-size: 2em;
@@ -13,6 +11,11 @@
 
 .click-animation {
   animation:  pulse .5s ease;
+}
+
+:host > * {
+  display: block;
+  margin-top: 15px;
 }
 
 @keyframes pulse {

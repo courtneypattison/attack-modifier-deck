@@ -3,12 +3,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CardType } from './shared/card-type.model';
 import { DeckService } from './shared/deck.service';
 import { DeckState } from './shared/deck-state.model';
-import { Perk } from './shared/perk.model';
 
 @Component({
   selector: 'amd-deck',
   templateUrl: './deck.component.html',
-  styleUrls: ['./deck.component.css']
+  styleUrls: ['./deck.component.scss']
 })
 export class DeckComponent implements OnInit {
 
@@ -76,7 +75,7 @@ export class DeckComponent implements OnInit {
   }
 
   editPerks() {
-    
+
   }
 }
 

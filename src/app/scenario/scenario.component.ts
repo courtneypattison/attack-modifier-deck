@@ -5,7 +5,7 @@ import { ScenarioService } from './shared/scenario.service';
 @Component({
   selector: 'amd-scenario',
   templateUrl: './scenario.component.html',
-  styleUrls: ['./scenario.component.css']
+  styleUrls: ['./scenario.component.scss']
 })
 export class ScenarioComponent implements OnInit {
   @Input() characters: string[];

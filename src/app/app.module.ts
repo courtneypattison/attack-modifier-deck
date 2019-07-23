@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
+import { AlertModule } from 'ngx-bootstrap';
+
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
@@ -17,6 +19,7 @@ import { ScenarioComponent } from './scenario/scenario.component';
   ],
   imports: [
     BrowserModule,
+    AlertModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase, 'attack-modifier-deck'),
     AngularFirestoreModule,
   ],
