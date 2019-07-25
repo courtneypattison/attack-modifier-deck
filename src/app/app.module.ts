@@ -5,7 +5,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
+import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
+import { ScenarioModule } from './scenario/scenario.module';
 
 import { environment } from '../environments/environment';
 
@@ -17,14 +19,16 @@ import { ScenarioComponent } from './scenario/scenario.component';
   declarations: [
     AppComponent,
     DeckComponent,
-    ScenarioComponent,
+    ScenarioComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     ButtonsModule.forRoot(),
     CoreModule,
     AngularFireModule.initializeApp(environment.firebase, 'attack-modifier-deck'),
     AngularFirestoreModule,
+    ScenarioModule
   ],
   providers: [],
   bootstrap: [AppComponent]
