@@ -475,6 +475,13 @@
     lodash.camelcase "^4.3.0"
     protobufjs "^6.8.6"
 
+"@ng-select/ng-select@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-3.0.3.tgz#c57ec23e953000d84c1fd3a449bdb0e38811597d"
+  integrity sha512-x+qAi/RHJrgOO8V9a88LVwFBdsgyr/Hm4nLjW/mxUAdMJRKRsacEt4DCJid5ul4gDt/Aqym/rvHpQaP+JWtRsQ==
+  dependencies:
+    tslib "^1.9.0"
+
 "@ngtools/webpack@8.1.2":
   version "8.1.2"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-8.1.2.tgz#5f96371d51a7f338a29990916b5b77f55bbf1ca6"
