@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 import { CardType } from './card-type.model';
-import { CardTypeCounts } from './card-type-counts.model';
-import { CharacterPerks } from './character-perks.model'
+import { CharacterPerks } from './character-perks.model';
 import { DeckState } from './deck-state.model';
 import { Reshuffle } from './reshuffle.model';
 import { StandardAttackModifierDeck } from './standard-attack-modifier-deck';
@@ -53,7 +51,7 @@ export class DeckService {
     let characterDeck = this.buildDeck(characterClass);
 
     return this.angularFirestore
-      .doc<DeckState>(`characters/${characterClass}`)
+      .doc<DeckState>(`decks/${characterClass}`)
       .set({
         characterDeck: characterDeck,
         characterPerks: CharacterPerks[characterClass],
@@ -71,7 +69,7 @@ export class DeckService {
     console.log(`getDeckState(): characterClass: ${characterClass}`);
 
     return this.angularFirestore
-      .doc<DeckState>(`characters/${characterClass}`)
+      .doc<DeckState>(`decks/${characterClass}`)
       .valueChanges();
   }
 
@@ -79,12 +77,12 @@ export class DeckService {
     console.log(`updateDeckState(): characterClass: ${characterClass} update: ${JSON.stringify(update)}`);
 
     this.angularFirestore
-      .doc<DeckState>(`characters/${characterClass}`)
+      .doc<DeckState>(`decks/${characterClass}`)
       .valueChanges()
       .pipe(first())
       .subscribe((deckState: DeckState) => {
         this.angularFirestore
-          .doc<DeckState>(`characters/${characterClass}`)
+          .doc<DeckState>(`decks/${characterClass}`)
           .update(update);
       });
   }
