@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ScenarioRoutingModule } from './scenario-routing.module';
 
@@ -13,6 +14,7 @@ import { ScenarioListComponent } from './scenario-list/scenario-list.component';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     ScenarioRoutingModule
   ],
   exports: [

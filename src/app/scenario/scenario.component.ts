@@ -15,9 +15,9 @@ export class ScenarioComponent implements OnInit {
   ngOnInit() {
   }
 
-  newScenario() {
+  addNewScenario() {
     for (const character of this.characters) {
-      this.scenarioService.newScenario(character);
+      this.scenarioService.addNewScenario(character);
     }
   }
 

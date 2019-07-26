@@ -1,1 +1,8 @@
-<p>new-scenario works!</p>
+<form [formGroup]="newScenarioForm" (ngSubmit)="addNewScenario()">
+  <div class="form-group">
+    <label for="inputScenarioName">Scenario Name</label>
+    <input type="text" class="form-control" id="inputScenarioName" placeholder="Enter scenario name (optional)">
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!newScenarioForm.valid">Add</button>
+</form>

@@ -1,15 +1,26 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
-import { DeckService } from 'src/app/deck/shared/deck.service';
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+
+import { DeckService } from "src/app/deck/shared/deck.service";
+import { Character } from "src/app/character/shared/character.model";
+import { CharacterService } from "../../character/shared/character.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ScenarioService {
+  constructor(
+    private characterService: CharacterService,
+    private deckService: DeckService
+  ) {}
 
-  constructor(private deckService: DeckService) { }
+  getCharacterNames(): Observable<Character[]> {
+    return this.characterService.getCharacters();
+  }
 
-  newScenario(characterClass: string) {
+  addNewScenario(characterClass: string) {
     this.deckService.addCharacterDeck(characterClass);
   }
 }
