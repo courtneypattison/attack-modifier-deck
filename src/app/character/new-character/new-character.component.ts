@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { CharacterService } from '../shared/character.service';
+import { CharacterClass } from '../shared/character-class.model';
 
 @Component({
   selector: 'amd-new-character',
@@ -9,14 +10,17 @@ import { CharacterService } from '../shared/character.service';
   styleUrls: ['./new-character.component.scss']
 })
 export class NewCharacterComponent implements OnInit {
+  classes: CharacterClass[];
+
   newCharacterForm = this.formBuilder.group({
-    characterName: ['Aaron', Validators.required],
-    characterClass: ['Cragheart', Validators.required]
+    name: [null, Validators.required],
+    class: [null, Validators.required]
   });
 
   constructor(private formBuilder: FormBuilder, private characterService: CharacterService) { }
 
   ngOnInit() {
+    this.classes = this.characterService.getCharacterClasses();
   }
 
   addNewCharacter() {

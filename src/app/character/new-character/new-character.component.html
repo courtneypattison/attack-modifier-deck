@@ -1,8 +1,17 @@
 <form [formGroup]="newCharacterForm" (ngSubmit)="addNewCharacter()">
-    <div class="form-group">
-      <label for="inputCharacterName">Character Name</label>
-      <input type="text" class="form-control" id="inputCharacterName" placeholder="Aaron">
-    </div>
+  <h1>Add a new character</h1>
 
-    <button type="submit" class="btn btn-primary" [disabled]="!newCharacterForm.valid">Add</button>
-  </form>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" formControlName="name" placeholder="Aaron">
+  </div>
+
+  <div class="form-group">
+    <label for="class">Class</label>
+    <ng-select [searchable]="false" [clearable]="false" labelForId="class" formControlName="class">
+      <ng-option *ngFor="let class of classes" value="{{class}}">{{class}}</ng-option>
+    </ng-select>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!newCharacterForm.valid">Add</button>
+</form>
