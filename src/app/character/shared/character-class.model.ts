@@ -1,4 +1,4 @@
-export enum Character {
+export enum CharacterClass {
   Spellweaver = 'Spellweaver',
   Cragheart = 'Cragheart',
   InoxBrute = 'Inox Brute',

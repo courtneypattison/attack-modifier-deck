@@ -1,4 +1,3 @@
-import { Character } from './character.model';
 import { DeckModifier } from './deck-modifier.model';
 import { Perk } from './perk.model';
 

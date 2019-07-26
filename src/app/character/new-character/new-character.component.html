@@ -1,0 +1,8 @@
+<form [formGroup]="newCharacterForm" (ngSubmit)="addNewCharacter()">
+    <div class="form-group">
+      <label for="inputCharacterName">Character Name</label>
+      <input type="text" class="form-control" id="inputCharacterName" placeholder="Aaron">
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!newCharacterForm.valid">Add</button>
+  </form>
