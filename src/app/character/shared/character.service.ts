@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 import { Character } from './character.model';
+import { CharacterClass } from './character-class.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +22,16 @@ export class CharacterService {
   }
 
   getCharacters(): Observable<Character[]> {
-      console.log(`getCharacters()`);
+    console.log(`getCharacters()`);
 
-      return this.angularFirestore
-        .collection<Character>(`characters`)
-        .valueChanges();
-    }
+    return this.angularFirestore
+      .collection<Character>(`characters`)
+      .valueChanges();
+  }
+
+  getCharacterClasses(): CharacterClass[] {
+    console.log(`getCharacterClasses()`);
+
+    return Object.values(CharacterClass);
+  }
 }
