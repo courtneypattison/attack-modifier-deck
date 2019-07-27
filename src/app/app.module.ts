@@ -3,8 +3,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
-import { NgSelectModule } from '@ng-select/ng-select';
-import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
@@ -26,13 +25,12 @@ import { ScenarioComponent } from './scenario/scenario.component';
   imports: [
     AppRoutingModule,
     BrowserModule,
-    ButtonsModule.forRoot(),
     CharacterModule,
     CoreModule,
     AngularFireModule.initializeApp(environment.firebase, 'attack-modifier-deck'),
     AngularFirestoreModule,
-    NgSelectModule,
-    ScenarioModule
+    ScenarioModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
