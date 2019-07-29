@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { NewScenarioComponent } from './new-scenario/new-scenario.component';
 import { ScenarioComponent } from './scenario.component';
+import { ScenarioNewComponent } from './scenario-new/scenario-new.component';
 
 const scenarioRoutes = [
   { path: 'scenario', component: ScenarioComponent },
-  { path: 'new-scenario', component: NewScenarioComponent },
+  { path: 'scenario-new', component: ScenarioNewComponent },
 ];
 
 @NgModule({

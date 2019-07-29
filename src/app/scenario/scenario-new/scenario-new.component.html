@@ -1,0 +1,17 @@
+<form [formGroup]="scenarioNewForm" (ngSubmit)="addScenarioNew()">
+  <h1>Add a new scenario</h1>
+
+  <div class="form-group">
+    <label for="scenarioName">Scenario Name</label>
+    <input type="text" class="form-control" id="scenarioName" placeholder="Enter scenario name (optional)" formControlName="scenarioName">
+  </div>
+
+  <div class="form-group">
+    <label for="characterNames">Characters</label>
+    <ng-select [searchable]="false" [clearable]="false" [multiple]="true" labelForId="characterNames" formControlName="characterNames">
+      <ng-option *ngFor="let character of characterNames | async" value="{{character}}">{{character}}</ng-option>
+    </ng-select>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!scenarioNewForm.valid">Add</button>
+</form>
