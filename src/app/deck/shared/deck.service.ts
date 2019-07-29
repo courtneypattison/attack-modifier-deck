@@ -9,6 +9,7 @@ import { CharacterPerks } from './character-perks.model';
 import { DeckState } from './deck-state.model';
 import { Reshuffle } from './reshuffle.model';
 import { StandardAttackModifierDeck } from './standard-attack-modifier-deck';
+import { CharacterService } from 'src/app/character/shared/character.service';
 
 
 @Injectable({
@@ -18,7 +19,7 @@ export class DeckService {
 
   deckState: DeckState;
 
-  constructor(private angularFirestore: AngularFirestore) { }
+  constructor(private angularFirestore: AngularFirestore, private characterService: CharacterService) { }
 
   private buildDeck(characterClass: string): string[] {
     let cardTypeCounts = { ...StandardAttackModifierDeck };
@@ -46,12 +47,14 @@ export class DeckService {
     return deck;
   }
 
-  addCharacterDeck(characterClass: string): Promise<void> {
-    console.log(`addCharacterDeck(): characterClass: ${characterClass}`);
+  async addCharacterDeck(scenarioId: string, characterName: string): Promise<void> {
+    console.log(`addCharacterDeck(): dateCreated: ${scenarioId}, characterName: ${characterName}`);
+    let characterClass = await this.characterService.getCharacterClass(characterName);
+    console.log(`got characterClass ${characterClass}`);
     let characterDeck = this.buildDeck(characterClass);
 
-    return this.angularFirestore
-      .doc<DeckState>(`decks/${characterClass}`)
+    await this.angularFirestore
+      .doc<DeckState>(`${scenarioId}/${characterName}`)
       .set({
         characterDeck: characterDeck,
         characterPerks: CharacterPerks[characterClass],
@@ -60,9 +63,8 @@ export class DeckService {
         playOnceDeck: [],
         drawnCard: '.',
         shouldShuffle: false,
-      }).then(() => {
-        this.shuffle(characterClass);
       });
+    this.shuffle(characterClass);
   }
 
   getDeckState(characterClass: string): Observable<DeckState> {
