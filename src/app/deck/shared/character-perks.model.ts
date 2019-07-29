@@ -51,12 +51,13 @@ const VermlingMindtheifPerks = [
 
 const QuatrylTinkererPerks = [
   createPerk(1, 'Remove two -1 cards', 2, { '+1': -2 }),
+  createPerk(1, 'Replace one -2 card with one +0 card', 1, { '-2': -2, '+0': 0 }),
   createPerk(1, 'Add one +3 card', 1, { '+3': 1 }),
 ];
 
 const InoxBrutePerks = [
   createPerk(1, 'Remove two -1 cards', 2, { '+1': -2 }),
-  createPerk(0, 'Replace one -1 card with one +1 card', 1, { '-1': -1, '+1': 1 }),
+  createPerk(1, 'Replace one -1 card with one +1 card', 1, { '-1': -1, '+1': 1 }),
   createPerk(0, 'Add two +1 cards', 2, { '+1': 2 }),
   createPerk(1, 'Add one +3 card', 1, { '+3': 1 }),
   createPerk(0, 'Add three PUSH 1 cards', 2, { 'PUSH 1': 3 }),
