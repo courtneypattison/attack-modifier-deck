@@ -7,9 +7,9 @@
   </div>
 
   <div class="form-group">
-    <label for="characterNames">Characters</label>
-    <ng-select [searchable]="false" [clearable]="false" [multiple]="true" labelForId="characterNames" formControlName="characterNames">
-      <ng-option *ngFor="let character of characterNames | async" value="{{character}}">{{character}}</ng-option>
+    <label for="characters">Characters</label>
+    <ng-select [searchable]="false" [clearable]="false" [multiple]="true" labelForId="characters" formControlName="characters">
+      <ng-option *ngFor="let character of characters | async" value="{{character.name}} ({{character.class}})">{{character.name}} ({{character.class}})</ng-option>
     </ng-select>
   </div>
 
