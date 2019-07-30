@@ -14,19 +14,27 @@ export class CharacterService {
 
   constructor(private angularFirestore: AngularFirestore) { }
 
+  private getCharacterPath(characterName: string): string {
+    return `${this.getCharactersPath()}${characterName}`;
+  }
+
+  private getCharactersPath(): string {
+    return 'id/data/characters/';
+  }
+
   addNewCharacter(character: Character): Promise<void> {
     console.log(`addCharacter(): character.name: ${character.name}, character.class: ${character.class}`);
 
     return this.angularFirestore
-      .doc<Character>(`characters/${character.name}`)
+      .doc<Character>(this.getCharacterPath(character.name))
       .set(character);
   }
 
-  getCharacters(): Observable<Character[]> {
-    console.log(`getCharacters()`);
+  getAllCharacters(): Observable<Character[]> {
+    console.log(`getAllCharacters()`);
 
     return this.angularFirestore
-      .collection<Character>(`characters`)
+      .collection<Character>(`id/data/characters`)
       .valueChanges();
   }
 
@@ -34,9 +42,11 @@ export class CharacterService {
     console.log(`getCharacterClass(characterName: ${characterName})`);
 
     return this.angularFirestore
-      .doc<Character>(`characters/${characterName}`)
+      .doc<Character>(`id/data/characters/${characterName}`)
       .valueChanges()
-      .pipe(first(),map((character: Character) => character.class))
+      .pipe(
+        first(),
+        map((character: Character) => character.class))
       .toPromise();
   }
 
@@ -44,22 +54,5 @@ export class CharacterService {
     console.log(`getCharacterClasses()`);
 
     return Object.values(CharacterClass);
-  }
-
-  getCharacterNames(): Observable<string[]> {
-    console.log(`getCharacterNames()`);
-
-    return this.angularFirestore
-      .collection<Character>(`characters`)
-      .valueChanges()
-      .pipe(
-        map((characters: Character[]) => {
-          let characterNames = [];
-          for (let character of characters) {
-            characterNames.push(character.name);
-          }
-          return characterNames;
-        })
-      );
   }
 }

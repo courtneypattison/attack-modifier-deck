@@ -10,6 +10,7 @@ import { DeckState } from './deck-state.model';
 import { Reshuffle } from './reshuffle.model';
 import { StandardAttackModifierDeck } from './standard-attack-modifier-deck';
 import { CharacterService } from 'src/app/character/shared/character.service';
+import { Character } from 'src/app/character/shared/character.model';
 
 
 @Injectable({
@@ -22,6 +23,8 @@ export class DeckService {
   constructor(private angularFirestore: AngularFirestore, private characterService: CharacterService) { }
 
   private buildDeck(characterClass: string): string[] {
+    console.log(`buildDeck(characterClass: ${characterClass})`);
+
     let cardTypeCounts = { ...StandardAttackModifierDeck };
     let perks = CharacterPerks[characterClass];
 
@@ -47,55 +50,55 @@ export class DeckService {
     return deck;
   }
 
-  async addCharacterDeck(scenarioId: string, characterName: string): Promise<void> {
-    console.log(`addCharacterDeck(): dateCreated: ${scenarioId}, characterName: ${characterName}`);
-    let characterClass = await this.characterService.getCharacterClass(characterName);
-    console.log(`got characterClass ${characterClass}`);
-    let characterDeck = this.buildDeck(characterClass);
+  async addCharacterDeck(scenarioId: string, character: Character): Promise<void> {
+    console.log(`addCharacterDeck(): scenarioId: ${scenarioId}, character.name: ${character.name}, character.class: ${character.class}`);
+    let characterDeck = this.buildDeck(character.class);
 
     await this.angularFirestore
-      .doc<DeckState>(`${scenarioId}/${characterName}`)
+      .doc<DeckState>(`id/scenarios/${scenarioId}/${character.name}`)
       .set({
+        name: character.name,
+        class: character.class,
         characterDeck: characterDeck,
-        characterPerks: CharacterPerks[characterClass],
+        characterPerks: CharacterPerks[character.class],
         scenarioDeck: characterDeck,
         inPlayDeck: [],
         playOnceDeck: [],
         drawnCard: '.',
         shouldShuffle: false,
       });
-    this.shuffle(characterClass);
+    this.shuffle(scenarioId, character.name);
   }
 
-  getDeckState(characterClass: string): Observable<DeckState> {
-    console.log(`getDeckState(): characterClass: ${characterClass}`);
+  getDeckState(scenarioId: string, characterName: string): Observable<DeckState> {
+    console.log(`getDeckState(scenarioId: ${scenarioId}, characterName: ${characterName})`);
 
     return this.angularFirestore
-      .doc<DeckState>(`decks/${characterClass}`)
+      .doc<DeckState>(`id/scenarios/${scenarioId}/${characterName}`)
       .valueChanges();
   }
 
-  private updateDeckState(characterClass: string, update: {}) {
-    console.log(`updateDeckState(): characterClass: ${characterClass} update: ${JSON.stringify(update)}`);
+  private updateDeckState(scenarioId: string, characterName: string, update: {}) {
+    console.log(`updateDeckState(): scenarioId: ${scenarioId}, characterName: ${characterName}, update: ${JSON.stringify(update)}`);
 
     this.angularFirestore
-      .doc<DeckState>(`decks/${characterClass}`)
+      .doc<DeckState>(`id/scenarios/${scenarioId}/${characterName}`)
       .valueChanges()
       .pipe(first())
       .subscribe((deckState: DeckState) => {
         this.angularFirestore
-          .doc<DeckState>(`decks/${characterClass}`)
+          .doc<DeckState>(`id/scenarios/${scenarioId}/${characterName}`)
           .update(update);
       });
   }
 
-  shuffle(characterClass: string) {
-    console.log(`shuffle(): characterClass: ${characterClass}`);
+  shuffle(scenarioId: string, characterName: string) {
+    console.log(`shuffle(): scenarioId: ${scenarioId}, characterName: ${characterName}`);
 
-    this.getDeckState(characterClass)
+    this.getDeckState(scenarioId, characterName)
       .pipe(first())
       .subscribe((deckState: DeckState) => {
-        this.updateDeckState(characterClass, {
+        this.updateDeckState(scenarioId, characterName, {
           drawnCard: '.',
           shouldShuffle: false,
           inPlayDeck: deckState.scenarioDeck.slice(0)
@@ -107,8 +110,8 @@ export class DeckService {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
-  private pickRandomCard(characterClass: string, deckState: DeckState) {
-    console.log(`pickRandomCard(): characterClass: ${characterClass} deckState: ${JSON.stringify(deckState)}`);
+  private pickRandomCard(scenarioId: string, characterName: string, deckState: DeckState) {
+    console.log(`pickRandomCard(): scenarioId: ${scenarioId}, characterName: ${characterName} deckState: ${JSON.stringify(deckState)}`);
     const size = this.size(deckState);
     if (size === 0) {
       return '.';
@@ -119,7 +122,7 @@ export class DeckService {
       const value = deckState.inPlayDeck[index];
 
       deckState.inPlayDeck.splice(index, 1);
-      this.updateDeckState(characterClass, { inPlayDeck: deckState.inPlayDeck });
+      this.updateDeckState(scenarioId, characterName, { inPlayDeck: deckState.inPlayDeck });
 
       return value;
     } else {
@@ -127,57 +130,53 @@ export class DeckService {
       const value = deckState.playOnceDeck[i];
 
       deckState.playOnceDeck.splice(i, 1);
-      this.updateDeckState(characterClass, { playOnceDeck: deckState.playOnceDeck });
+      this.updateDeckState(scenarioId, characterName, { playOnceDeck: deckState.playOnceDeck });
 
       return value;
     }
   }
 
-  drawCard(characterClass: string) {
-    console.log(`draw(): characterClass: ${characterClass}`);
+  drawCard(scenarioId: string, characterName: string) {
+    console.log(`draw(): scenarioId: ${scenarioId}, characterName: ${characterName}`);
 
-    return this.getDeckState(characterClass)
+    return this.getDeckState(scenarioId, characterName)
       .pipe(first())
       .subscribe((deckState: DeckState) => {
         if (this.size(deckState) === 0) {
-          this.shuffle(characterClass);
+          this.shuffle(scenarioId, characterName);
         }
 
-        const drawnCard = this.pickRandomCard(characterClass, deckState);
-        this.updateDeckState(characterClass, {
-          drawnCard: drawnCard
-        });
-        console.log(`Drawing card: characterClass: ${characterClass} drawnCard: ${drawnCard}`);
+        const drawnCard = this.pickRandomCard(scenarioId, characterName, deckState);
+        this.updateDeckState(scenarioId, characterName, { drawnCard: drawnCard });
+        console.log(`Drawing card: characterName: ${characterName} drawnCard: ${drawnCard}`);
 
         if (Reshuffle.findIndex(o => drawnCard.startsWith(o)) >= 0) {
           console.log(`Need to reshuffle`);
-          this.updateDeckState(characterClass, {
-            shouldShuffle: true
-          });
+          this.updateDeckState(scenarioId, characterName, { shouldShuffle: true });
         }
       });
   }
 
-  private addplayOnceDeck(characterClass: string, card: string) {
-    console.log(`addPlayOnceDeck(): characterClass: ${characterClass} card: ${card}`);
+  private addplayOnceDeck(scenarioId: string, characterName: string, card: string) {
+    console.log(`addPlayOnceDeck(): scenarioId: ${scenarioId}, characterName: ${characterName} card: ${card}`);
 
-    return this.getDeckState(characterClass)
+    return this.getDeckState(scenarioId, characterName)
       .pipe(first())
       .subscribe((deckState: DeckState) => {
         deckState.playOnceDeck.push(card);
-        this.updateDeckState(characterClass, { playOnceDeck: deckState.playOnceDeck });
+        this.updateDeckState(scenarioId, characterName, { playOnceDeck: deckState.playOnceDeck });
       });
   }
 
-  private addScenarioCard(characterClass: string, card: string) {
-    console.log(`addScenarioCard(): characterClass: ${characterClass} card: ${card}`);
+  private addScenarioCard(scenarioId: string, characterName: string, card: string) {
+    console.log(`addScenarioCard(): scenarioId: ${scenarioId}, characterName: ${characterName} card: ${card}`);
 
-    return this.getDeckState(characterClass)
+    return this.getDeckState(scenarioId, characterName)
       .pipe(first())
       .subscribe((deckState: DeckState) => {
         deckState.scenarioDeck.push(card);
         deckState.inPlayDeck.push(card);
-        this.updateDeckState(characterClass, {
+        this.updateDeckState(scenarioId, characterName, {
           scenarioDeck: deckState.scenarioDeck,
           inPlayDeck: deckState.inPlayDeck,
         });
@@ -210,22 +209,22 @@ export class DeckService {
     return `${cardType} ${count > 0 ? `(${count})` : ''}`;
   }
 
-  bless(characterClass: string) {
-    console.log(`bless(): characterClass: ${characterClass}`);
+  bless(scenarioId: string, characterName: string) {
+    console.log(`bless(): scenarioId: ${scenarioId}, characterName: ${characterName}`);
 
-    this.addplayOnceDeck(characterClass, CardType.Bless);
+    this.addplayOnceDeck(scenarioId, characterName, CardType.Bless);
   }
 
-  curse(characterClass: string) {
-    console.log(`curse(): characterClass: ${characterClass}`);
+  curse(scenarioId: string, characterName: string) {
+    console.log(`curse(): scenarioId: ${scenarioId}, characterName: ${characterName}`);
 
-    this.addplayOnceDeck(characterClass, CardType.Curse);
+    this.addplayOnceDeck(scenarioId, characterName, CardType.Curse);
   }
 
-  addMinusOne(characterClass: string) {
-    console.log(`addMinusOne(): characterClass: ${characterClass}`);
+  addMinusOne(scenarioId: string, characterName: string) {
+    console.log(`addMinusOne(): scenarioId: ${scenarioId}, characterName: ${characterName}`);
 
-    this.addScenarioCard(characterClass, CardType.ScenarioMinusOne);
+    this.addScenarioCard(scenarioId, characterName, CardType.ScenarioMinusOne);
   }
 
 }

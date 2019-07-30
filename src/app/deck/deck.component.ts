@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRouteSnapshot } from '@angular/router';
 
 import { CardType } from './shared/card-type.model';
 import { DeckService } from './shared/deck.service';
 import { DeckState } from './shared/deck-state.model';
+import { Character } from '../character/shared/character.model';
 
 @Component({
   selector: 'amd-deck',
@@ -11,7 +13,8 @@ import { DeckState } from './shared/deck-state.model';
 })
 export class DeckComponent implements OnInit {
 
-  @Input() characterClass: string;
+  @Input() character: Character;
+  @Input() scenarioId: string
   deckState: DeckState;
   activeDeckSize: number;
   blessButtonValue: string;
@@ -29,6 +32,8 @@ export class DeckComponent implements OnInit {
   setDefaultState() {
     this.clickAnimation = false;
     this.deckState = {
+      name: this.character.name,
+      class: this.character.class,
       characterDeck: [],
       characterPerks: [],
       scenarioDeck: [],
@@ -43,7 +48,7 @@ export class DeckComponent implements OnInit {
   }
 
   getDeckState() {
-    this.deckService.getDeckState(this.characterClass).subscribe((deckState: DeckState) => {
+    this.deckService.getDeckState(this.scenarioId, this.character.name).subscribe((deckState: DeckState) => {
       this.deckState = deckState;
       this.activeDeckSize = this.deckService.size(deckState);
       this.blessButtonValue = this.deckService.getAddInValue(deckState, CardType.Bless);
@@ -53,25 +58,25 @@ export class DeckComponent implements OnInit {
   }
 
   drawCard() {
-    this.deckService.drawCard(this.characterClass);
+    this.deckService.drawCard(this.scenarioId, this.character.name);
     this.clickAnimation = true;
     delay(1000).then(() => this.clickAnimation = false);
   }
 
   shuffle() {
-    this.deckService.shuffle(this.characterClass);
+    this.deckService.shuffle(this.scenarioId, this.character.name);
   }
 
   curse() {
-    this.deckService.curse(this.characterClass);
+    this.deckService.curse(this.scenarioId, this.character.name);
   }
 
   bless() {
-    this.deckService.bless(this.characterClass);
+    this.deckService.bless(this.scenarioId, this.character.name);
   }
 
   addMinusOne() {
-    this.deckService.addMinusOne(this.characterClass);
+    this.deckService.addMinusOne(this.scenarioId, this.character.name);
   }
 
   editPerks() {
