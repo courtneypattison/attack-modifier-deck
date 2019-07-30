@@ -6,9 +6,9 @@ import { ScenarioActiveComponent } from './scenario-active/scenario-active.compo
 import { ScenarioNewComponent } from './scenario-new/scenario-new.component';
 
 const scenarioRoutes = [
+  { path: 'scenario/new', component: ScenarioNewComponent },
   { path: 'scenario/:id', component: ScenarioActiveComponent },
-  { path: 'scenarios', component: ScenarioComponent },
-  { path: 'scenario-new', component: ScenarioNewComponent },
+  { path: 'scenario', component: ScenarioComponent },
 ];
 
 @NgModule({

@@ -6,7 +6,7 @@ import { CharacterComponent } from './character.component';
 
 const characterRoutes = [
   { path: 'character', component: CharacterComponent },
-  { path: 'new-character', component: NewCharacterComponent },
+  { path: 'character/new', component: NewCharacterComponent },
 ];
 
 @NgModule({
