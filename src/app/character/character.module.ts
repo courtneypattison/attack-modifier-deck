@@ -15,10 +15,10 @@ import { NewCharacterComponent } from './new-character/new-character.component';
     NewCharacterComponent,
   ],
   imports: [
-    CharacterRoutingModule,
     CommonModule,
     NgSelectModule,
     ReactiveFormsModule,
+    CharacterRoutingModule,
   ]
 })
 export class CharacterModule { }
