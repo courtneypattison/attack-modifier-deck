@@ -1,0 +1,6 @@
+  <div class="row">
+    <amd-deck *ngFor="let character of characters | async" [character]="character" [scenarioId]="scenarioId"
+      class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+    </amd-deck>
+    <p *ngFor="let character of characters | async">{{character.characterName}}</p>
+  </div>
