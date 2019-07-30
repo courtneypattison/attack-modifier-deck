@@ -1,7 +1,8 @@
 <div class="d-flex justify-content-between">
-    <div>{{characterClass}}</div>
-    <div>{{activeDeckSize}}</div>
-  </div>
+  <div>{{character.name}}</div>
+  <div>{{activeDeckSize}}</div>
+</div>
+<div class="small">{{character.class}}</div>
 <div class="card-drawn" [ngClass]="{'click-animation' : clickAnimation}">{{deckState.drawnCard}}</div>
 <div>
   <input type="button" class="btn btn-warning btn-lg" (click)="drawCard()" value="Draw" />
