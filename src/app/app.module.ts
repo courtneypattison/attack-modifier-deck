@@ -13,24 +13,22 @@ import { ScenarioModule } from './scenario/scenario.module';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
-import { DeckComponent } from './deck/deck.component';
 import { ScenarioComponent } from './scenario/scenario.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DeckComponent,
     ScenarioComponent
   ],
   imports: [
-    AppRoutingModule,
     BrowserModule,
     CharacterModule,
     CoreModule,
     AngularFireModule.initializeApp(environment.firebase, 'attack-modifier-deck'),
     AngularFirestoreModule,
     ScenarioModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
