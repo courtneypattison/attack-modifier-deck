@@ -1,5 +1,5 @@
-import { DeckModifier } from './deck-modifier.model';
-import { Perk } from './perk.model';
+import { DeckModifier } from '../../deck/shared/deck-modifier.model';
+import { Perk } from '../../deck/shared/perk.model';
 
 function createPerk(activeCount: number, description: string, count: number, deckModifier: DeckModifier): Perk {
   return {

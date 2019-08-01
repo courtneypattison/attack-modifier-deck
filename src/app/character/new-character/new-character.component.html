@@ -8,9 +8,16 @@
 
   <div class="form-group">
     <label for="class">Class</label>
-    <ng-select [searchable]="false" [clearable]="false" labelForId="class" formControlName="class">
+    <ng-select [searchable]="false" [clearable]="false" labelForId="class" formControlName="class" (change)="onClassChange()">
       <ng-option *ngFor="let class of classes" value="{{class}}">{{class}}</ng-option>
     </ng-select>
+  </div>
+
+  <div *ngIf="newCharacterForm.value.class" formArrayName="perks">
+    <div class="form-check" *ngFor="let address of perks.controls; let i=index">
+      <input class="form-check-input" type="checkbox" value="" id="perks" [formControlName]="i">
+      <label class="form-check-label" for="perks">{{characterPerks[i].description}}</label>
+    </div>
   </div>
 
   <button type="submit" class="btn btn-primary" [disabled]="!newCharacterForm.valid">Add</button>

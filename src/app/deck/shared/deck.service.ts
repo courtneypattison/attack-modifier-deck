@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 import { CardType } from './card-type.model';
-import { CharacterPerks } from './character-perks.model';
+import { CharacterPerks } from '../../character/shared/character-perks.model';
 import { DeckState } from './deck-state.model';
 import { Reshuffle } from './reshuffle.model';
 import { StandardAttackModifierDeck } from './standard-attack-modifier-deck';
