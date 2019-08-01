@@ -27,20 +27,12 @@ export class ScenarioNewComponent implements OnInit {
     this.characters = this.characterService.getAllCharacters();
   }
 
-  private extractCharacters(characterStrs: string[]): Character[] {
-    return characterStrs.map((characterStr: string) => {
-      return {
-        name: characterStr.substring(0, characterStr.lastIndexOf("(") - 1),
-        class: CharacterClass[characterStr.substring(characterStr.lastIndexOf("(") + 1, characterStr.length - 1)],
-      }
-    });
-  }
-
   addScenarioNew() {
+    console.log(`charcters: ${this.scenarioNewForm.value.characters}`);
     const scenarioNew = {
       dateCreated: new Date(),
       scenarioName: this.scenarioNewForm.value.scenarioName,
-      characters: this.extractCharacters(this.scenarioNewForm.value.characters),
+      characters: this.scenarioNewForm.value.characters,
     }
     this.scenarioService.addScenarioNew(scenarioNew);
   }

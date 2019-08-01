@@ -1,13 +1,21 @@
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="#">Attack Modifier Deck</a>
-  <div class="fill-space"></div>
-  <div class="btn-group" dropdown>
-    <button id="button-basic" dropdownToggle type="button" class="btn btn-light dropdown-toggle"
-      aria-controls="dropdown-basic">
-      <span class="plus">+</span><span class="caret"></span>
-    </button>
-    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="button-basic">
-      <li role="menuitem"><a class="dropdown-item" routerLink="/scenario/new">New Scenario</a></li>
-      <li role="menuitem"><a class="dropdown-item" routerLink="/character/new">New Character</a></li>
-    </ul>
-  </div>
+<header>
+  <nav>
+    <mat-toolbar color="primary" class="mat-elevation-z6">
+      <a mat-button href="/">Attack Modifier Deck</a>
+
+      <div class="fill-space"></div>
+
+      <button mat-mini-fab color="accent" [matMenuTriggerFor]="menu">
+        <mat-icon aria-label="Add">add</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/scenario/new">New Scenario</button>
+        <button mat-menu-item routerLink="/character/new">New Character</button>
+      </mat-menu>
+
+      <ng-template #showSignIn>
+        <a mat-raised-button routerLink="/signin" color="accent">Sign In</a>
+      </ng-template>
+    </mat-toolbar>
+  </nav>
+</header>

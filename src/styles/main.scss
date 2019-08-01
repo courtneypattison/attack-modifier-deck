@@ -1,12 +1,19 @@
-@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~@angular/material/prebuilt-themes/purple-green.css";
+@import './general';
 
 body {
-  background: #3e2723;
+  background: #303030;
   color: #fff;
   font-family: 'Merienda';
-  font-size: 1.75em;
 }
 
 h1 {
   color: #ebc034;
+}
+
+form {
+  margin: 0 auto;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
 }

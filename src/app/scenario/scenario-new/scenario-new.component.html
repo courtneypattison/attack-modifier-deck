@@ -1,17 +1,18 @@
 <form [formGroup]="scenarioNewForm" (ngSubmit)="addScenarioNew()">
   <h1>Add a new scenario</h1>
 
-  <div class="form-group">
-    <label for="scenarioName">Scenario Name</label>
-    <input type="text" class="form-control" id="scenarioName" placeholder="Enter scenario name (optional)" formControlName="scenarioName">
-  </div>
+  <mat-form-field>
+    <input matInput formControlName="scenarioName" placeholder="Scenario Name" value="">
+  </mat-form-field>
 
-  <div class="form-group">
-    <label for="characters">Characters</label>
-    <ng-select [searchable]="false" [clearable]="false" [multiple]="true" labelForId="characters" formControlName="characters">
-      <ng-option *ngFor="let character of characters | async" value="{{character.name}} ({{character.class}})">{{character.name}} ({{character.class}})</ng-option>
-    </ng-select>
-  </div>
+  <mat-form-field>
+    <mat-label>Characters</mat-label>
+    <mat-select formControlName="characters" multiple>
+      <mat-option *ngFor="let character of characters | async" [value]="character">
+        {{character.name}} ({{character.class}})
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  <button type="submit" class="btn btn-primary" [disabled]="!scenarioNewForm.valid">Add</button>
+  <button mat-raised-button color="primary" [disabled]="!scenarioNewForm.valid">Add</button>
 </form>

@@ -1,7 +1,11 @@
-.plus {
-  font-size: 1.5em;
+.fill-space {
+  flex: 1 1 auto;
 }
 
-.navbar {
+#title {
+  font-size: 1.3em;
+}
+
+nav {
   margin: 0 -15px 15px -15px;
 }
