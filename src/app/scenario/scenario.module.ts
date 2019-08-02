@@ -7,14 +7,14 @@ import { SharedModule } from '../shared/shared.module';
 
 import { DeckComponent } from '../deck/deck.component';
 import { ScenarioNewComponent } from './scenario-new/scenario-new.component';
-import { ScenarioListComponent } from './scenario-list/scenario-list.component';
+import { ScenarioTableComponent } from './scenario-table/scenario-table.component';
 import { ScenarioActiveComponent } from './scenario-active/scenario-active.component';
 
 @NgModule({
   declarations: [
     DeckComponent,
     ScenarioNewComponent,
-    ScenarioListComponent,
+    ScenarioTableComponent,
     ScenarioActiveComponent,
   ],
   imports: [
@@ -24,7 +24,7 @@ import { ScenarioActiveComponent } from './scenario-active/scenario-active.compo
     SharedModule,
   ],
   exports: [
-    ScenarioListComponent,
+    ScenarioTableComponent,
   ]
 })
 export class ScenarioModule { }
