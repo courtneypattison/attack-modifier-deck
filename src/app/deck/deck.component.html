@@ -1,26 +1,24 @@
-<div class="d-flex justify-content-between">
-  <div>{{character.name}}</div>
+<div id="deck-info">
+  <h2>{{character.name}}</h2>
   <div>{{activeDeckSize}}</div>
 </div>
-<div class="small">{{character.class}}</div>
+<div>{{character.class}}</div>
 <div class="card-drawn" [ngClass]="{'click-animation' : clickAnimation}">{{deckState.drawnCard}}</div>
 <div>
-  <input type="button" class="btn btn-warning btn-lg" (click)="drawCard()" value="Draw" />
+  <button mat-raised-button color="primary" (click)="drawCard()">Draw</button>
 </div>
 <div>
-  <input type="button" class="btn btn-light btn-lg" (click)="shuffle()" value="Shuffle"
-    *ngIf="!deckState.shouldShuffle; else shouldntShuffle" />
+  <button mat-raised-button (click)="shuffle()" *ngIf="!deckState.shouldShuffle; else shouldntShuffle">Shuffle</button>
 </div>
 <div>
-  <ng-template #shouldntShuffle><input type="button" class="btn btn-danger btn-lg" (click)="shuffle()"
-      value="Shuffle" /></ng-template>
+  <ng-template #shouldntShuffle><button mat-raised-button color="warn" (click)="shuffle()">Shuffle</button></ng-template>
 </div>
 <div>
-  <input type="button" class="btn btn-light btn-lg" (click)="curse()" value="{{curseButtonValue}}" />
+  <button mat-raised-button (click)="curse()">{{curseButtonValue}}</button>
 </div>
 <div>
-  <input type="button" class="btn btn-light btn-lg" (click)="bless()" value="{{blessButtonValue}}" />
+  <button mat-raised-button (click)="bless()">{{blessButtonValue}}</button>
 </div>
 <div>
-  <input type="button" class="btn btn-light btn-lg" (click)="addMinusOne()" value="{{minusOneButtonValue}}" />
+  <button mat-raised-button (click)="addMinusOne()">{{minusOneButtonValue}}</button>
 </div>

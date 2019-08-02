@@ -1,11 +1,16 @@
-.btn {
+#deck-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
   width: 100%;
 }
 
 .card-drawn {
   width: 100%;
   text-align: center;
-  font-size: 2em;
+  font-size: 3em;
   border-radius: 6px;
 }
 
@@ -15,7 +20,7 @@
 
 :host > * {
   display: block;
-  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 @keyframes pulse {

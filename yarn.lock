@@ -491,13 +491,6 @@
     lodash.camelcase "^4.3.0"
     protobufjs "^6.8.6"
 
-"@ng-select/ng-select@^3.0.3":
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-3.0.3.tgz#c57ec23e953000d84c1fd3a449bdb0e38811597d"
-  integrity sha512-x+qAi/RHJrgOO8V9a88LVwFBdsgyr/Hm4nLjW/mxUAdMJRKRsacEt4DCJid5ul4gDt/Aqym/rvHpQaP+JWtRsQ==
-  dependencies:
-    tslib "^1.9.0"
-
 "@ngtools/webpack@8.1.2":
   version "8.1.2"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-8.1.2.tgz#5f96371d51a7f338a29990916b5b77f55bbf1ca6"
@@ -4765,11 +4758,6 @@ neo-async@^2.5.0, neo-async@^2.6.0:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
-
-ngx-bootstrap@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-5.1.0.tgz#4a3d1b9ab099a4f8c01e8760c947873cb8505569"
-  integrity sha512-gHmIH1dZcZgbgu9Y88iPa8JaMkSM1QrU1zPDSJIw5TUNXVbwhvi5bzh2ttjvL88agyVWmTHM0mgyntPAgULxCQ==
 
 nice-try@^1.0.4:
   version "1.0.5"
