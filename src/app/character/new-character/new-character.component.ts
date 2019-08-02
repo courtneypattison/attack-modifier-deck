@@ -28,18 +28,15 @@ export class NewCharacterComponent implements OnInit {
   }
 
   addNewCharacter() {
-    console.log(`addnewcharacter ${this.newCharacterForm.value}`);
     this.characterService.addNewCharacter(this.newCharacterForm.value);
   }
 
   onClassChange() {
     this.characterPerks = this.newCharacterForm.value.class ? CharacterPerks[this.newCharacterForm.value.class] : [];
-    console.log(`onClassChange(${this.newCharacterForm.value.class}, ${CharacterPerks[this.newCharacterForm.value.class]})`);
     this.perks.clear();
     for (let perk of this.characterPerks) {
       this.addPerk(perk.activeCount);
     }
-    console.log(this.newCharacterForm.value.perks);
   }
 
   addPerk(activeCount: number) {

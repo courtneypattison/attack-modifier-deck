@@ -22,15 +22,15 @@ export class DeckService {
 
   constructor(private angularFirestore: AngularFirestore, private characterService: CharacterService) { }
 
-  private buildDeck(characterClass: string): string[] {
+  private buildDeck(characterClass: string, activePerks: number[]): string[] {
     console.log(`buildDeck(characterClass: ${characterClass})`);
 
     let cardTypeCounts = { ...StandardAttackModifierDeck };
     let perks = CharacterPerks[characterClass];
 
-    for (let perk of perks) {
-      for (let card in perk.deckModifier) {
-        const delta =  perk.activeCount * perk.deckModifier[card];
+    for (let i in perks) {
+      for (let card in perks[i].deckModifier) {
+        const delta =  activePerks[i] * perks[i].deckModifier[card];
         if (card in cardTypeCounts) {
           cardTypeCounts[card] += delta;
         } else {
@@ -52,7 +52,7 @@ export class DeckService {
 
   async addCharacterDeck(scenarioId: string, character: Character): Promise<void> {
     console.log(`addCharacterDeck(): scenarioId: ${scenarioId}, character.name: ${character.name}, character.class: ${character.class}`);
-    let characterDeck = this.buildDeck(character.class);
+    let characterDeck = this.buildDeck(character.class, character.perks);
 
     await this.angularFirestore
       .doc<DeckState>(`id/scenarios/${scenarioId}/${character.name}`)
