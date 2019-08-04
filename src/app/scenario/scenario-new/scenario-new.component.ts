@@ -17,7 +17,7 @@ export class ScenarioNewComponent implements OnInit {
   characters: Observable<Character[]>;
 
   scenarioNewForm = this.formBuilder.group({
-    scenarioName: null,
+    name: null,
     characters: ['', Validators.required]
   });
 
@@ -27,14 +27,19 @@ export class ScenarioNewComponent implements OnInit {
     this.characters = this.characterService.getAllCharacters();
   }
 
+  createScenarioId(dateCreated: Date): string {
+    return `${dateCreated.getFullYear()}-${dateCreated.getMonth() + 1}-${dateCreated.getDate()}-${dateCreated.getHours()}-${dateCreated.getMinutes()}-${dateCreated.getSeconds()}`
+  }
+
   addScenarioNew() {
     console.log(`charcters: ${this.scenarioNewForm.value.characters}`);
+    const dateCreated = new Date();
     const scenarioNew = {
-      dateCreated: new Date(),
-      scenarioName: this.scenarioNewForm.value.scenarioName,
+      id: this.createScenarioId(dateCreated),
+      dateCreated: dateCreated,
+      name: this.scenarioNewForm.value.name,
       characters: this.scenarioNewForm.value.characters,
     }
     this.scenarioService.addScenarioNew(scenarioNew);
   }
-
 }

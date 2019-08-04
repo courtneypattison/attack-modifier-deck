@@ -22,6 +22,10 @@ export class DeckService {
 
   constructor(private angularFirestore: AngularFirestore, private characterService: CharacterService) { }
 
+  private getDeckPath(scenarioId: string, characterName: string): string {
+    return `id/data/scenarios/${scenarioId}/characters/${characterName}`;
+  }
+
   private buildDeck(characterClass: string, activePerks: number[]): string[] {
     console.log(`buildDeck(characterClass: ${characterClass})`);
 
@@ -55,7 +59,7 @@ export class DeckService {
     let characterDeck = this.buildDeck(character.class, character.perks);
 
     await this.angularFirestore
-      .doc<DeckState>(`id/scenarios/${scenarioId}/${character.name}`)
+      .doc<DeckState>(this.getDeckPath(scenarioId, character.name))
       .set({
         name: character.name,
         class: character.class,
@@ -74,7 +78,7 @@ export class DeckService {
     console.log(`getDeckState(scenarioId: ${scenarioId}, characterName: ${characterName})`);
 
     return this.angularFirestore
-      .doc<DeckState>(`id/scenarios/${scenarioId}/${characterName}`)
+      .doc<DeckState>(this.getDeckPath(scenarioId, characterName))
       .valueChanges();
   }
 
@@ -82,12 +86,12 @@ export class DeckService {
     console.log(`updateDeckState(): scenarioId: ${scenarioId}, characterName: ${characterName}, update: ${JSON.stringify(update)}`);
 
     this.angularFirestore
-      .doc<DeckState>(`id/scenarios/${scenarioId}/${characterName}`)
+      .doc<DeckState>(this.getDeckPath(scenarioId, characterName))
       .valueChanges()
       .pipe(first())
       .subscribe((deckState: DeckState) => {
         this.angularFirestore
-          .doc<DeckState>(`id/scenarios/${scenarioId}/${characterName}`)
+          .doc<DeckState>(this.getDeckPath(scenarioId, characterName))
           .update(update);
       });
   }
