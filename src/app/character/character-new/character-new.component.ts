@@ -28,7 +28,9 @@ export class CharacterNewComponent implements OnInit {
   }
 
   addCharacterNew() {
-    this.characterService.addCharacterNew(this.characterNewForm.value);
+    const characterNew = this.characterNewForm.value
+    characterNew.id = this.characterService.getCharacterId(characterNew.name);
+    this.characterService.addCharacterNew(characterNew);
   }
 
   onClassChange() {

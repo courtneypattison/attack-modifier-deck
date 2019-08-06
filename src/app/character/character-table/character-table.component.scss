@@ -1,0 +1,16 @@
+.character-table {
+  margin: 15px 0 15px 0;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 600px;
+}
+
+.mat-column-actions {
+  justify-content: flex-end;
+}
+
+.mat-column-id {
+  flex-basis: 30%;
+}

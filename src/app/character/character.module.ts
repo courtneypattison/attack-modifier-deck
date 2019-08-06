@@ -7,11 +7,13 @@ import { SharedModule } from '../shared/shared.module';
 
 import { CharacterComponent } from './character.component';
 import { CharacterNewComponent } from './character-new/character-new.component';
+import { CharacterTableComponent } from './character-table/character-table.component';
 
 @NgModule({
   declarations: [
     CharacterComponent,
     CharacterNewComponent,
+    CharacterTableComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,35 @@
+<div *ngIf="isCharacter" class="character-table mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let character">
+            <button mat-button routerLink="/character/{{character.id}}">{{character.name}}</button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="class">
+        <mat-header-cell *matHeaderCellDef>Class</mat-header-cell>
+        <mat-cell *matCellDef="let character">{{character.class}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let character">
+            <button mat-icon-button color="accent" routerLink="/character/{{character.id}}">
+                <mat-icon aria-label="Edit">edit</mat-icon>
+              </button>
+          <button mat-icon-button color="warn" (click)="deleteCharacter(character.id)">
+            <mat-icon aria-label="Delete">delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+
+    <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+  </div>
+

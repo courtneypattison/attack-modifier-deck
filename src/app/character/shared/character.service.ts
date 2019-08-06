@@ -22,11 +22,15 @@ export class CharacterService {
     return 'id/data/characters/';
   }
 
+  getCharacterId(characterName: string): string {
+    return characterName.replace(/\s+/g, "-");
+  }
+
   addCharacterNew(character: Character): Promise<void> {
     console.log(`addCharacter(): character.name: ${character.name}, character.class: ${character.class}`);
 
     return this.angularFirestore
-      .doc<Character>(this.getCharacterPath(character.name))
+      .doc<Character>(this.getCharacterPath(this.getCharacterId(character.name)))
       .set(character);
   }
 
@@ -54,5 +58,13 @@ export class CharacterService {
     console.log(`getCharacterClasses()`);
 
     return Object.values(CharacterClass);
+  }
+
+  deleteCharacter(characterId: string): Promise<void> {
+    console.log(`deleteCharacter(characterId: ${characterId})`);
+
+    return this.angularFirestore
+      .doc<Character>(this.getCharacterPath(characterId))
+      .delete();
   }
 }
