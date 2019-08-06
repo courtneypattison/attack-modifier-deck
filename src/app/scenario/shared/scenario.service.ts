@@ -39,10 +39,10 @@ export class ScenarioService {
     this.router.navigate(['/scenario', scenario.id]);
   }
 
-  deleteScenario(scenarioId: string) {
+  deleteScenario(scenarioId: string): Promise<void> {
     console.log(`deleteScenario(scenarioId: ${scenarioId})`);
 
-    this.angularFirestore
+    return this.angularFirestore
       .doc<Scenario>(this.getScenarioPath(scenarioId))
       .delete();
   }
