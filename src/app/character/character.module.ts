@@ -6,12 +6,12 @@ import { CharacterRoutingModule } from './character-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
 import { CharacterComponent } from './character.component';
-import { NewCharacterComponent } from './new-character/new-character.component';
+import { CharacterNewComponent } from './character-new/character-new.component';
 
 @NgModule({
   declarations: [
     CharacterComponent,
-    NewCharacterComponent,
+    CharacterNewComponent,
   ],
   imports: [
     CommonModule,

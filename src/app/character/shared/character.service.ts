@@ -22,7 +22,7 @@ export class CharacterService {
     return 'id/data/characters/';
   }
 
-  addNewCharacter(character: Character): Promise<void> {
+  addCharacterNew(character: Character): Promise<void> {
     console.log(`addCharacter(): character.name: ${character.name}, character.class: ${character.class}`);
 
     return this.angularFirestore

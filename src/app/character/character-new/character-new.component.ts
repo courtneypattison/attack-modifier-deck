@@ -7,15 +7,15 @@ import { CharacterPerk } from '../shared/character-perk.model';
 import { CharacterPerks } from '../shared/character-perks.model';
 
 @Component({
-  selector: 'amd-new-character',
-  templateUrl: './new-character.component.html',
-  styleUrls: ['./new-character.component.scss']
+  selector: 'amd-character-new',
+  templateUrl: './character-new.component.html',
+  styleUrls: ['./character-new.component.scss']
 })
-export class NewCharacterComponent implements OnInit {
+export class CharacterNewComponent implements OnInit {
   classes: CharacterClass[];
   characterPerks: CharacterPerk[];
 
-  newCharacterForm = this.formBuilder.group({
+  characterNewForm = this.formBuilder.group({
     name: [null, Validators.required],
     class: [null, Validators.required],
     perks: this.formBuilder.array([]),
@@ -27,12 +27,12 @@ export class NewCharacterComponent implements OnInit {
     this.classes = this.characterService.getCharacterClasses();
   }
 
-  addNewCharacter() {
-    this.characterService.addNewCharacter(this.newCharacterForm.value);
+  addCharacterNew() {
+    this.characterService.addCharacterNew(this.characterNewForm.value);
   }
 
   onClassChange() {
-    this.characterPerks = this.newCharacterForm.value.class ? CharacterPerks[this.newCharacterForm.value.class] : [];
+    this.characterPerks = this.characterNewForm.value.class ? CharacterPerks[this.characterNewForm.value.class] : [];
     this.perks.clear();
     for (let perk of this.characterPerks) {
       this.addPerk(perk.activeCount);
@@ -44,7 +44,7 @@ export class NewCharacterComponent implements OnInit {
   }
 
   get perks() {
-    return this.newCharacterForm.get('perks') as FormArray;
+    return this.characterNewForm.get('perks') as FormArray;
   }
 
 }
