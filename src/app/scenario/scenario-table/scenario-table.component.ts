@@ -26,7 +26,6 @@ export class ScenarioTableComponent implements OnInit {
     this.scenarioService
       .getScenarios()
       .subscribe((scenarios: Scenario[]) => {
-        console.log(`scenarios: (${JSON.stringify(scenarios)})`);
         if (scenarios.length) {
           this.isScenario = true;
         } else {
