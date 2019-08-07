@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { CharacterService } from '../shared/character.service';
 import { CharacterClass } from '../shared/character-class.model';
@@ -21,7 +22,7 @@ export class CharacterNewComponent implements OnInit {
     perks: this.formBuilder.array([]),
   });
 
-  constructor(private formBuilder: FormBuilder, private characterService: CharacterService) { }
+  constructor(private formBuilder: FormBuilder, private characterService: CharacterService, private router: Router) { }
 
   ngOnInit() {
     this.classes = this.characterService.getCharacterClasses();
@@ -30,7 +31,9 @@ export class CharacterNewComponent implements OnInit {
   addCharacterNew() {
     const characterNew = this.characterNewForm.value
     characterNew.id = this.characterService.getCharacterId(characterNew.name);
-    this.characterService.addCharacterNew(characterNew);
+    this.characterService
+      .addCharacterNew(characterNew)
+      .then(any => this.router.navigate(['/character']));
   }
 
   onClassChange() {
