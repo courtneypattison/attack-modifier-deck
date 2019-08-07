@@ -14,8 +14,9 @@ export class CharacterService {
 
   constructor(private angularFirestore: AngularFirestore) { }
 
-  private getCharacterPath(characterName: string): string {
-    return `${this.getCharactersPath()}${characterName}`;
+  private getCharacterPath(characterId: string): string {
+    console.log(`getCharacterPath(): ${this.getCharactersPath()}${characterId}`);
+    return `${this.getCharactersPath()}${characterId}`;
   }
 
   private getCharactersPath(): string {
@@ -30,8 +31,32 @@ export class CharacterService {
     console.log(`addCharacter(): character.name: ${character.name}, character.class: ${character.class}`);
 
     return this.angularFirestore
-      .doc<Character>(this.getCharacterPath(this.getCharacterId(character.name)))
+      .doc<Character>(this.getCharacterPath(character.id))
       .set(character);
+  }
+
+  editCharacter(characterOld: Character, characterNew: Character): Promise<void> {
+    console.log(`editCharacter(characterOld: ${JSON.stringify(characterNew)}, characterNew: ${JSON.stringify(characterNew)})`);
+
+    if (characterOld.name === characterNew.name) {
+      return this.angularFirestore
+      .doc<Character>(this.getCharacterPath(characterNew.id))
+      .set(characterNew);
+    }
+
+    return this.deleteCharacter(characterOld.id).then(any => {
+      return this.addCharacterNew(characterNew);
+    })
+  }
+
+  getCharacter(characterId: string): Promise<Character> {
+    console.log(`getCharacter(characterId: ${characterId})`);
+
+    return this.angularFirestore
+      .doc<Character>(this.getCharacterPath(characterId))
+      .valueChanges()
+      .pipe(first())
+      .toPromise();
   }
 
   getAllCharacters(): Observable<Character[]> {

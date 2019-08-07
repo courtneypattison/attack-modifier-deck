@@ -1,0 +1,27 @@
+<form *ngIf="character" [formGroup]="characterEditForm" (ngSubmit)="editCharacter()">
+  <h1>Edit character</h1>
+
+  <mat-form-field>
+    <input matInput formControlName="name" placeholder="Name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Class</mat-label>
+    <mat-select formControlName="class" (selectionChange)="onClassChange()">
+      <mat-option *ngFor="let class of classes" [value]="class">
+        {{class}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div formArrayName="perks">
+    <div *ngFor="let address of perks.controls; let i=index">
+      <mat-slider id="perks" max="{{characterPerks[i].count}}" min="0" step="1" thumbLabel="true" tickInterval="1"
+        value="{{characterPerks[i].activeCount}}" [formControlName]="i">
+      </mat-slider>
+      <label for="perks" class="description">{{characterPerks[i].description}}</label>
+    </div>
+  </div>
+
+  <button mat-raised-button color="primary" [disabled]="!characterEditForm.valid">Update</button>
+</form>
