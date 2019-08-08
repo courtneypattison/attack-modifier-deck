@@ -1,22 +1,22 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
 import { first } from 'rxjs/operators';
 
 import { Character } from '../../character/shared/character.model';
-import { DeckService } from "src/app/deck/shared/deck.service";
-import { Scenario } from "./scenario.model";
-import { Observable } from "rxjs";
+import { DeckService } from 'src/app/deck/shared/deck.service';
+import { Scenario } from './scenario.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class ScenarioService {
   constructor(private angularFirestore: AngularFirestore, private deckService: DeckService, private router: Router) { }
 
   private getScenarioPath(scenarioId: string): string {
-    return `id/data/scenarios/${scenarioId}`
+    return `id/data/scenarios/${scenarioId}`;
   }
 
   private getScenarioCharactersPath(scenarioId: string): string {
@@ -52,7 +52,7 @@ export class ScenarioService {
 
     return this.angularFirestore
       .collection<Scenario>(`id/data/scenarios`)
-      .valueChanges()
+      .valueChanges();
   }
 
   getScenarioCharacters(scenarioId: string): Promise<Character[]> {

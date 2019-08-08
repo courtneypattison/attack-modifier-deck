@@ -29,11 +29,11 @@ export class DeckService {
   private buildDeck(characterClass: string, activePerks: number[]): string[] {
     console.log(`buildDeck(characterClass: ${characterClass})`);
 
-    let cardTypeCounts = { ...StandardAttackModifierDeck };
-    let perks = CharacterPerks[characterClass];
+    const cardTypeCounts = { ...StandardAttackModifierDeck };
+    const perks = CharacterPerks[characterClass];
 
-    for (let i in perks) {
-      for (let card in perks[i].deckModifier) {
+    for (const i of Object.keys(perks)) {
+      for (const card of Object.keys(perks[i].deckModifier)) {
         const delta =  activePerks[i] * perks[i].deckModifier[card];
         if (card in cardTypeCounts) {
           cardTypeCounts[card] += delta;
@@ -43,9 +43,9 @@ export class DeckService {
       }
     }
 
-    let deck = [];
+    const deck = [];
 
-    for (let card in cardTypeCounts) {
+    for (const card of Object.keys(cardTypeCounts)) {
       for (let i = 0; i < cardTypeCounts[card]; i++) {
         deck.push(card);
       }
@@ -56,7 +56,7 @@ export class DeckService {
 
   async addCharacterDeck(scenarioId: string, character: Character): Promise<void> {
     console.log(`addCharacterDeck(): scenarioId: ${scenarioId}, character.name: ${character.name}, character.class: ${character.class}`);
-    let characterDeck = this.buildDeck(character.class, character.perks);
+    const characterDeck = this.buildDeck(character.class, character.perks);
 
     await this.angularFirestore
       .doc<DeckState>(this.getDeckPath(scenarioId, character.name))

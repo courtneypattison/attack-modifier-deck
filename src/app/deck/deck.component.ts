@@ -14,7 +14,7 @@ import { Character } from '../character/shared/character.model';
 export class DeckComponent implements OnInit {
 
   @Input() character: Character;
-  @Input() scenarioId: string
+  @Input() scenarioId: string;
   deckState: DeckState;
   activeDeckSize: number;
   blessButtonValue: string;

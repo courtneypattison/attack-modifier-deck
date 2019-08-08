@@ -24,7 +24,7 @@ export class CharacterService {
   }
 
   getCharacterId(characterName: string): string {
-    return characterName.replace(/\s+/g, "-");
+    return characterName.replace(/\s+/g, '-');
   }
 
   addCharacterNew(character: Character): Promise<void> {
@@ -46,7 +46,7 @@ export class CharacterService {
 
     return this.deleteCharacter(characterOld.id).then(any => {
       return this.addCharacterNew(characterNew);
-    })
+    });
   }
 
   getCharacter(characterId: string): Promise<Character> {

@@ -28,7 +28,12 @@ export class CharacterEditComponent implements OnInit {
   });
 
 
-  constructor(private route: ActivatedRoute, private router: Router, private characterService: CharacterService, private formBuilder: FormBuilder, ) { }
+  constructor(
+    private characterService: CharacterService,
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
     this.character = null;
@@ -50,7 +55,7 @@ export class CharacterEditComponent implements OnInit {
               .setValue(character.class);
             this.characterPerks = CharacterPerks[character.class];
 
-            for (let i in this.characterPerks) {
+            for (const i of Object.keys(this.characterPerks)) {
               this.characterPerks[i].activeCount = character.perks[i];
               this.addPerk(this.characterPerks[i].activeCount);
             }
@@ -61,7 +66,7 @@ export class CharacterEditComponent implements OnInit {
   onClassChange() {
     this.characterPerks = this.characterEditForm.value.class ? CharacterPerks[this.characterEditForm.value.class] : [];
     this.perks.clear();
-    for (let perk of this.characterPerks) {
+    for (const perk of this.characterPerks) {
       this.addPerk(0);
     }
   }

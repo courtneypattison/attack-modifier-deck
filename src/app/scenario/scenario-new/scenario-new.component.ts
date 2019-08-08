@@ -27,8 +27,8 @@ export class ScenarioNewComponent implements OnInit {
     this.characters = this.characterService.getAllCharacters();
   }
 
-  createScenarioId(dateCreated: Date): string {
-    return `${dateCreated.getFullYear()}-${dateCreated.getMonth() + 1}-${dateCreated.getDate()}-${dateCreated.getHours()}-${dateCreated.getMinutes()}-${dateCreated.getSeconds()}`
+  createScenarioId(date: Date): string {
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`;
   }
 
   addScenarioNew() {
@@ -39,7 +39,7 @@ export class ScenarioNewComponent implements OnInit {
       dateCreated: dateCreated,
       name: this.scenarioNewForm.value.name,
       characters: this.scenarioNewForm.value.characters,
-    }
+    };
     this.scenarioService.addScenarioNew(scenarioNew);
   }
 }

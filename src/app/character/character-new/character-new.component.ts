@@ -29,7 +29,7 @@ export class CharacterNewComponent implements OnInit {
   }
 
   addCharacterNew() {
-    const characterNew = this.characterNewForm.value
+    const characterNew = this.characterNewForm.value;
     characterNew.id = this.characterService.getCharacterId(characterNew.name);
     this.characterService
       .addCharacterNew(characterNew)
@@ -39,7 +39,7 @@ export class CharacterNewComponent implements OnInit {
   onClassChange() {
     this.characterPerks = this.characterNewForm.value.class ? CharacterPerks[this.characterNewForm.value.class] : [];
     this.perks.clear();
-    for (let perk of this.characterPerks) {
+    for (const perk of this.characterPerks) {
       this.addPerk(perk.activeCount);
     }
   }

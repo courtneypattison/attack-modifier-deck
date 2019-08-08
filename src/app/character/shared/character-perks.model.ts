@@ -74,4 +74,4 @@ export const CharacterPerks = {
   'Vermling Mindtheif': VermlingMindtheifPerks,
   'Inox Brute': InoxBrutePerks,
   'Quatryl Tinkerer': QuatrylTinkererPerks,
-}
+};
