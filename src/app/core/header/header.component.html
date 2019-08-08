@@ -2,21 +2,30 @@
   <nav>
     <mat-toolbar color="primary" class="mat-elevation-z6">
       <button mat-button routerLink="/">Attack Modifier Deck</button>
-      <button mat-button routerLink="/scenario">Scenarios</button>
-      <button mat-button routerLink="/character">Characters</button>
 
       <div class="fill-space"></div>
 
-      <button mat-mini-fab color="accent" [matMenuTriggerFor]="menu">
-        <mat-icon aria-label="Add">add</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/scenario/new">New Scenario</button>
-        <button mat-menu-item routerLink="/character/new">New Character</button>
-      </mat-menu>
+      <div *ngIf="authService.user | async as user; else showSignIn">
+
+        <button id="add-menu" mat-mini-fab color="primary" [matMenuTriggerFor]="addMenu">
+          <mat-icon aria-label="Add">add</mat-icon>
+        </button>
+        <mat-menu #addMenu="matMenu">
+          <button mat-menu-item routerLink="/scenario/new">New Scenario</button>
+          <button mat-menu-item routerLink="/character/new">New Character</button>
+        </mat-menu>
+
+        <button mat-mini-fab color="accent" [matMenuTriggerFor]="userMenu">{{userInitial | async | uppercase}}</button>
+        <mat-menu #userMenu="matMenu">
+          <button mat-menu-item routerLink="/scenario">Your Scenarios</button>
+          <button mat-menu-item routerLink="/character">Your Characters</button>
+          <button mat-menu-item (click)="signOut()">Sign Out</button>
+        </mat-menu>
+      </div>
 
       <ng-template #showSignIn>
-        <a mat-raised-button routerLink="/signin" color="accent">Sign In</a>
+        <button mat-button routerLink="/signin">Sign In</button>
+        <button mat-raised-button routerLink="/signup" color="accent">Sign Up</button>
       </ng-template>
     </mat-toolbar>
   </nav>
