@@ -3,10 +3,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 import { Observable } from 'rxjs';
 
+import { Character } from '../../character/shared/character.model';
 import { CharacterService } from '../../character/shared/character.service';
 import { ScenarioService } from '../shared/scenario.service';
-import { Character } from 'src/app/character/shared/character.model';
-import { CharacterClass } from 'src/app/character/shared/character-class.model';
 
 @Component({
   selector: 'amd-scenario-new',

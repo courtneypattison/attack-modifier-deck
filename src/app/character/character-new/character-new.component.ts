@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { CharacterService } from '../shared/character.service';
 import { CharacterClass } from '../shared/character-class.model';
 import { CharacterPerk } from '../shared/character-perk.model';
 import { CharacterPerks } from '../shared/character-perks.model';
+import { CharacterService } from '../shared/character.service';
 
 @Component({
   selector: 'amd-character-new',

@@ -12,8 +12,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from 'app/auth/shared/auth.service';
 import { HeaderComponent } from 'app/core/header/header.component';
 import { LoggerService } from 'app/core/logger.service';
-import { config } from 'testing/mock-config';
 import { FakeLoggerService } from 'testing/fake-logger.service';
+import { config } from 'testing/mock-config';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;

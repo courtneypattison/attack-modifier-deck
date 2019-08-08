@@ -1,4 +1,4 @@
-import { Character } from 'src/app/character/shared/character.model';
+import { Character } from '../../character/shared/character.model';
 
 export interface Scenario {
   id: string;

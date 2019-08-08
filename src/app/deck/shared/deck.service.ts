@@ -4,14 +4,13 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
-import { CardType } from './card-type.model';
 import { CharacterPerks } from '../../character/shared/character-perks.model';
+import { Character } from '../../character/shared/character.model';
+import { CharacterService } from '../../character/shared/character.service';
+import { CardType } from './card-type.model';
 import { DeckState } from './deck-state.model';
 import { Reshuffle } from './reshuffle.model';
 import { StandardAttackModifierDeck } from './standard-attack-modifier-deck';
-import { CharacterService } from 'src/app/character/shared/character.service';
-import { Character } from 'src/app/character/shared/character.model';
-
 
 @Injectable({
   providedIn: 'root'

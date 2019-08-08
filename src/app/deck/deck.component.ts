@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRouteSnapshot } from '@angular/router';
 
-import { CardType } from './shared/card-type.model';
-import { DeckService } from './shared/deck.service';
-import { DeckState } from './shared/deck-state.model';
 import { Character } from '../character/shared/character.model';
+import { CardType } from './shared/card-type.model';
+import { DeckState } from './shared/deck-state.model';
+import { DeckService } from './shared/deck.service';
 
 @Component({
   selector: 'amd-deck',

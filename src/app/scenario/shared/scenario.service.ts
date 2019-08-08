@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
+import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 import { Character } from '../../character/shared/character.model';
-import { DeckService } from 'src/app/deck/shared/deck.service';
+import { DeckService } from '../../deck/shared/deck.service';
 import { Scenario } from './scenario.model';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

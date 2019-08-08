@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 
-import { ScenarioService } from '../shared/scenario.service';
 import { Scenario } from '../shared/scenario.model';
+import { ScenarioService } from '../shared/scenario.service';
 
 @Component({
   selector: 'amd-scenario-table',

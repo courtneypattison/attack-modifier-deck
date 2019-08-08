@@ -4,8 +4,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 
-import { Character } from './character.model';
 import { CharacterClass } from './character-class.model';
+import { Character } from './character.model';
 
 @Injectable({
   providedIn: 'root'

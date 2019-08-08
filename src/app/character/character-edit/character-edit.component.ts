@@ -4,10 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { take } from 'rxjs/operators';
 
-import { Character } from '../shared/character.model';
 import { CharacterClass } from '../shared/character-class.model';
 import { CharacterPerk } from '../shared/character-perk.model';
 import { CharacterPerks } from '../shared/character-perks.model';
+import { Character } from '../shared/character.model';
 import { CharacterService } from '../shared/character.service';
 
 @Component({

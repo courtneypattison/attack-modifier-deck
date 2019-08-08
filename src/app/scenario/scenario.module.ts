@@ -1,14 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { ScenarioRoutingModule } from './scenario-routing.module';
-import { SharedModule } from '../shared/shared.module';
-
 import { DeckComponent } from '../deck/deck.component';
-import { ScenarioNewComponent } from './scenario-new/scenario-new.component';
-import { ScenarioTableComponent } from './scenario-table/scenario-table.component';
+import { SharedModule } from '../shared/shared.module';
 import { ScenarioActiveComponent } from './scenario-active/scenario-active.component';
+import { ScenarioNewComponent } from './scenario-new/scenario-new.component';
+import { ScenarioRoutingModule } from './scenario-routing.module';
+import { ScenarioTableComponent } from './scenario-table/scenario-table.component';
 
 @NgModule({
   declarations: [

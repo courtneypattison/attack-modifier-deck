@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { take } from 'rxjs/operators';
 
-import { Character } from 'src/app/character/shared/character.model';
+import { Character } from '../../character/shared/character.model';
 import { ScenarioService } from '../shared/scenario.service';
 
 @Component({

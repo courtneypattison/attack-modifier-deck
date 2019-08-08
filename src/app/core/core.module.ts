@@ -3,9 +3,8 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '../shared/shared.module';
-
-import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
 import { LoggerService } from './logger.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
