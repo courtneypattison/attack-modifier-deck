@@ -126,5 +126,8 @@
       }
     }
   },
-  "defaultProject": "attack-modifier-deck"
+  "defaultProject": "attack-modifier-deck",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
