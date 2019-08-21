@@ -14,12 +14,11 @@ export class CharacterService {
 
   constructor(private angularFirestore: AngularFirestore) { }
 
-  private getCharacterPath(characterId: string): string {
-    console.log(`getCharacterPath(): ${this.getCharactersPath()}${characterId}`);
-    return `${this.getCharactersPath()}${characterId}`;
+  private getCharacterDocPath(characterId: string): string {
+    return `${this.getCharacterCollectionPath()}${characterId}`;
   }
 
-  private getCharactersPath(): string {
+  private getCharacterCollectionPath(): string {
     return 'id/data/characters/';
   }
 
@@ -31,7 +30,7 @@ export class CharacterService {
     console.log(`addCharacter(): character.name: ${character.name}, character.class: ${character.class}`);
 
     return this.angularFirestore
-      .doc<Character>(this.getCharacterPath(character.id))
+      .doc<Character>(this.getCharacterDocPath(character.id))
       .set(character);
   }
 
@@ -40,7 +39,7 @@ export class CharacterService {
 
     if (characterOld.name === characterNew.name) {
       return this.angularFirestore
-      .doc<Character>(this.getCharacterPath(characterNew.id))
+      .doc<Character>(this.getCharacterDocPath(characterNew.id))
       .set(characterNew);
     }
 
@@ -53,7 +52,7 @@ export class CharacterService {
     console.log(`getCharacter(characterId: ${characterId})`);
 
     return this.angularFirestore
-      .doc<Character>(this.getCharacterPath(characterId))
+      .doc<Character>(this.getCharacterDocPath(characterId))
       .valueChanges()
       .pipe(first())
       .toPromise();
@@ -63,7 +62,7 @@ export class CharacterService {
     console.log(`getAllCharacters()`);
 
     return this.angularFirestore
-      .collection<Character>(`id/data/characters`)
+      .collection<Character>(this.getCharacterCollectionPath())
       .valueChanges();
   }
 
@@ -71,7 +70,7 @@ export class CharacterService {
     console.log(`getCharacterClass(characterName: ${characterName})`);
 
     return this.angularFirestore
-      .doc<Character>(`id/data/characters/${characterName}`)
+      .doc<Character>(this.getCharacterDocPath(characterName))
       .valueChanges()
       .pipe(
         first(),
@@ -89,7 +88,7 @@ export class CharacterService {
     console.log(`deleteCharacter(characterId: ${characterId})`);
 
     return this.angularFirestore
-      .doc<Character>(this.getCharacterPath(characterId))
+      .doc<Character>(this.getCharacterDocPath(characterId))
       .delete();
   }
 }

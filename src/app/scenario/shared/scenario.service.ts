@@ -15,17 +15,21 @@ import { Scenario } from './scenario.model';
 export class ScenarioService {
   constructor(private angularFirestore: AngularFirestore, private deckService: DeckService, private router: Router) { }
 
-  private getScenarioPath(scenarioId: string): string {
-    return `id/data/scenarios/${scenarioId}`;
+  private getScenarioCollectionPath(): string {
+    return `id/data/scenarios`;
   }
 
-  private getScenarioCharactersPath(scenarioId: string): string {
-    return `id/data/scenarios/${scenarioId}/characters`;
+  private getScenarioDocPath(scenarioId: string): string {
+    return `${this.getScenarioCollectionPath()}/${scenarioId}`;
+  }
+
+  private getScenarioCharacterCollectionPath(scenarioId: string): string {
+    return `${this.getScenarioDocPath(scenarioId)}/characters`;
   }
 
   addScenarioNew(scenario: Scenario) {
     this.angularFirestore
-      .doc<Scenario>(this.getScenarioPath(scenario.id))
+      .doc<Scenario>(this.getScenarioDocPath(scenario.id))
       .set({
         id: scenario.id,
         dateCreated: scenario.dateCreated,
@@ -43,7 +47,7 @@ export class ScenarioService {
     console.log(`deleteScenario(scenarioId: ${scenarioId})`);
 
     return this.angularFirestore
-      .doc<Scenario>(this.getScenarioPath(scenarioId))
+      .doc<Scenario>(this.getScenarioDocPath(scenarioId))
       .delete();
   }
 
@@ -51,7 +55,7 @@ export class ScenarioService {
     console.log(`getScenarios()`);
 
     return this.angularFirestore
-      .collection<Scenario>(`id/data/scenarios`)
+      .collection<Scenario>(this.getScenarioCollectionPath())
       .valueChanges();
   }
 
@@ -59,7 +63,7 @@ export class ScenarioService {
     console.log(`getScenarioCharacters(scenarioId: ${scenarioId})`);
 
     return this.angularFirestore
-      .collection<Character>(this.getScenarioCharactersPath(scenarioId))
+      .collection<Character>(this.getScenarioCharacterCollectionPath(scenarioId))
       .valueChanges()
       .pipe(first())
       .toPromise();
