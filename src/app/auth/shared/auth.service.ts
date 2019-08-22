@@ -4,6 +4,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { Credentials } from '../shared/credentials.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,12 +25,12 @@ export class AuthService {
       .pipe(map((user: firebase.User) => user.email[0]));
   }
 
-  signIn(username: string, password: string): Promise<firebase.auth.UserCredential> {
-    return this.angularFireAuth.auth.signInWithEmailAndPassword(this.addDomain(username), password);
+  signIn(credentials: Credentials): Promise<firebase.auth.UserCredential> {
+    return this.angularFireAuth.auth.signInWithEmailAndPassword(this.addDomain(credentials.username), credentials.password);
   }
 
-  signUp(username: string, password: string): Promise<firebase.auth.UserCredential> {
-    return this.angularFireAuth.auth.createUserWithEmailAndPassword(this.addDomain(username), password);
+  signUp(credentials): Promise<firebase.auth.UserCredential> {
+    return this.angularFireAuth.auth.createUserWithEmailAndPassword(this.addDomain(credentials.username), credentials.password);
   }
 
   signOut(): Promise<void> {

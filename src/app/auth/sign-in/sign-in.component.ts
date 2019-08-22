@@ -21,8 +21,8 @@ export class SignInComponent implements OnInit {
   }
 
   signIn() {
-    this.authService
-      .signIn(this.signInForm.value.username, this.signInForm.value.password)
-      .then((userCredential: firebase.auth.UserCredential) => this.router.navigate(['scenario']));
+    // this.authService
+    //   .signIn(this.signInForm.value.username, this.signInForm.value.password)
+    //   .then((userCredential: firebase.auth.UserCredential) => this.router.navigate(['scenario']));
   }
 }
