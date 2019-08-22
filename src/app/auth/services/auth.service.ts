@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Credentials } from '../shared/credentials.model';
+import { Credentials } from '../models/credentials.model';
 
 @Injectable({
   providedIn: 'root'

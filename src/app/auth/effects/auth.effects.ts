@@ -5,12 +5,12 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { from, of } from 'rxjs';
 import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
 
-import { AuthService } from '../../auth/shared/auth.service';
-import { Credentials } from '../../auth/shared/credentials.model';
 import * as AuthActions from '../actions/auth.actions';
+import { Credentials } from '../models/credentials.model';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
-export class AppEffects {
+export class AuthEffects {
   constructor(private actions$: Actions, private authService: AuthService, private router: Router) {}
 
   signUp$ = createEffect(() =>

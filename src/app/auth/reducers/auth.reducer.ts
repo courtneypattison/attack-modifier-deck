@@ -16,11 +16,18 @@ export const initialState: State = {
 
 const authReducer = createReducer(
   initialState,
+
   on(AuthActions.signIn, (state) => ({ ...state, errorMessage: null })),
+  on(AuthActions.signInFailure, (state, { errorMessage }) => ({ ...state, errorMessage })),
+  on(AuthActions.signInSuccess, (state, { username }) => ({ ...state, username, errorMessage: null })),
+
+  on(AuthActions.signOut, (state) => ({ ...state, errorMessage: null })),
+  on(AuthActions.signOutFailure, (state, { errorMessage }) => ({ ...state, errorMessage })),
+  on(AuthActions.signOutSuccess, () => (initialState)),
+
   on(AuthActions.signUp, (state) => ({ ...state, errorMessage: null })),
   on(AuthActions.signUpFailure, (state, { errorMessage }) => ({ ...state, errorMessage })),
   on(AuthActions.signUpSuccess, (state, { username }) => ({ ...state, username, errorMessage: null })),
-
 );
 
 export function reducer(state: State | undefined, action: Action) {
@@ -28,3 +35,4 @@ export function reducer(state: State | undefined, action: Action) {
 }
 
 export const getErrorMessage = (state: State) => state.errorMessage;
+export const getUsername = (state: State) => state.username;

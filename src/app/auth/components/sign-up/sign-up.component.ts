@@ -1,31 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
 import { select, Store } from '@ngrx/store';
 
-import { signUp } from '../../store/actions/auth.actions';
-import * as fromStore from '../../store/reducers';
-import { AuthService } from '../shared/auth.service';
+import { signUp } from '../../actions/auth.actions';
+import * as fromAuth from '../../reducers';
 
 @Component({
   selector: 'amd-sign-up',
   templateUrl: './sign-up.component.html',
 })
 export class SignUpComponent implements OnInit {
-  errorMessage$ = this.store.pipe(select(fromStore.getErrorMessage));
+  errorMessage$ = this.store.pipe(select(fromAuth.getErrorMessage));
 
   signUpForm = this.formBuilder.group({
     username: [null, Validators.required],
     password: [null, Validators.required]
   });
 
-  constructor(
-    private authService: AuthService,
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private store: Store<fromStore.State>,
-    ) { }
+  constructor(private formBuilder: FormBuilder, private store: Store<fromAuth.State>) { }
 
   ngOnInit() {
   }
@@ -39,8 +32,5 @@ export class SignUpComponent implements OnInit {
         }
       })
     );
-    // this.authService
-    //   .signUp(this.signUpForm.value.username, this.signUpForm.value.password)
-    //   .then((userCredential: firebase.auth.UserCredential) => this.router.navigate(['scenario']));
   }
 }

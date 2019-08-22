@@ -12,13 +12,12 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { reducers } from './auth/reducers';
 import { CharacterModule } from './character/character.module';
 import { CoreModule } from './core/core.module';
 import { ScenarioComponent } from './scenario/scenario.component';
 import { ScenarioModule } from './scenario/scenario.module';
 import { SharedModule } from './shared/shared.module';
-import { AppEffects } from './store/effects/app.effects';
-import { metaReducers, reducers } from './store/reducers';
 
 @NgModule({
   declarations: [
@@ -37,13 +36,12 @@ import { metaReducers, reducers } from './store/reducers';
     SharedModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, {
-      metaReducers,
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true
       }
     }),
-    EffectsModule.forRoot([AppEffects]),
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [],
