@@ -10,7 +10,6 @@ import { ScenarioService } from '../shared/scenario.service';
 @Component({
   selector: 'amd-scenario-new',
   templateUrl: './scenario-new.component.html',
-  styleUrls: ['./scenario-new.component.scss']
 })
 export class ScenarioNewComponent implements OnInit {
   characters: Observable<Character[]>;

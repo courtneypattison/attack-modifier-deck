@@ -7,7 +7,6 @@ import { AuthService } from '../shared/auth.service';
 @Component({
   selector: 'amd-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
   signInForm = this.formBuilder.group({

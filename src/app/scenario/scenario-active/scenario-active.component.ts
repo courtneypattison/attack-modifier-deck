@@ -9,7 +9,6 @@ import { ScenarioService } from '../shared/scenario.service';
 @Component({
   selector: 'amd-scenario-active',
   templateUrl: './scenario-active.component.html',
-  styleUrls: ['./scenario-active.component.scss']
 })
 export class ScenarioActiveComponent implements OnInit {
   characters: Promise<Character[]>;

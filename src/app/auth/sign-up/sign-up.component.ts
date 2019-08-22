@@ -11,7 +11,6 @@ import { AuthService } from '../shared/auth.service';
 @Component({
   selector: 'amd-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
   errorMessage$ = this.store.pipe(select(fromStore.getErrorMessage));
