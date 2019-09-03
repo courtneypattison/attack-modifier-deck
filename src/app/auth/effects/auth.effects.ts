@@ -11,7 +11,7 @@ import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthEffects {
-  constructor(private actions$: Actions, private authService: AuthService, private router: Router) {}
+  constructor(private actions$: Actions, private authService: AuthService) {}
 
   signUp$ = createEffect(() =>
     this.actions$.pipe(
@@ -26,11 +26,28 @@ export class AuthEffects {
     )
   );
 
-  signUpSuccess$ = createEffect(() =>
+  signIn$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.signUpSuccess),
-      tap(() => this.router.navigate(['scenario']))
-    ),
-    { dispatch: false }
+      ofType(AuthActions.signIn),
+      map(action => action.credentials),
+      exhaustMap((credentials: Credentials) =>
+        from(this.authService.signIn(credentials)).pipe(
+          map((userCredential: firebase.auth.UserCredential) => AuthActions.signInSuccess({ username: userCredential.user.email })),
+          catchError((error: firebase.auth.Error) => of(AuthActions.signInFailure({ errorMessage: error.message })))
+        )
+      )
+    )
+  );
+
+  signOut$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.signOut),
+      exhaustMap(() =>
+        from(this.authService.signOut()).pipe(
+          map(() => AuthActions.signOutSuccess()),
+          catchError((error: firebase.auth.Error) => of(AuthActions.signOutFailure({ errorMessage: error.message })))
+        )
+      )
+    )
   );
 }
