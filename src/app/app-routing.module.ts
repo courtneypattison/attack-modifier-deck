@@ -16,7 +16,7 @@ const appRoutes: Routes = [
     AuthModule,
     CharacterModule,
     ScenarioModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
   ],
   exports: [RouterModule]
 })
