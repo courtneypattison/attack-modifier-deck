@@ -17,7 +17,7 @@
     "@angular/common": "^10.2.4",
     "@angular/compiler": "^10.2.4",
     "@angular/core": "^10.2.4",
-    "@angular/fire": "^5.2.1",
+    "@angular/fire": "^6.1.4",
     "@angular/forms": "^10.2.4",
     "@angular/http": "^7.2.15",
     "@angular/material": "^10.2.7",
@@ -30,7 +30,7 @@
     "@ngrx/store-devtools": "^8.2.0",
     "bootstrap": "^4.3.1",
     "core-js": "^3.1.4",
-    "firebase": "^6.3.4",
+    "firebase": "^8.2.2",
     "rxjs": "^6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
