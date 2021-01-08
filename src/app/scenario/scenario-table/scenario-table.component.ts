@@ -13,7 +13,7 @@ export class ScenarioTableComponent implements OnInit {
   isScenario: boolean;
   dataSource: MatTableDataSource<Scenario>;
   displayedColumns = ['id', 'name', 'actions'];
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private scenarioService: ScenarioService) { }
 

@@ -13,7 +13,7 @@ export class CharacterTableComponent implements OnInit {
   isCharacter: boolean;
   dataSource: MatTableDataSource<Character>;
   displayedColumns = ['name', 'class', 'actions'];
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private characterService: CharacterService) { }
 
