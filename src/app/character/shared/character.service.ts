@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { CharacterClass } from './character-class.model';
 import { Character } from './character.model';
 
@@ -12,14 +13,14 @@ import { Character } from './character.model';
 })
 export class CharacterService {
 
-  constructor(private angularFirestore: AngularFirestore) { }
+  constructor(private angularFirestore: AngularFirestore, private authService: AuthService) { }
+
+  private getCharacterCollectionPath(): string {
+    return `${this.authService.getUsername()}/data/characters/`;
+  }
 
   private getCharacterDocPath(characterId: string): string {
     return `${this.getCharacterCollectionPath()}${characterId}`;
-  }
-
-  private getCharacterCollectionPath(): string {
-    return 'id/data/characters/';
   }
 
   getCharacterId(characterName: string): string {

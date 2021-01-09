@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Credentials } from '../models/credentials.model';
@@ -12,9 +12,11 @@ import { Credentials } from '../models/credentials.model';
 })
 export class AuthService {
   user: Observable<firebase.User>;
+  userBS: BehaviorSubject<firebase.User> = new BehaviorSubject<firebase.User>(null);;
 
   constructor(private angularFireAuth: AngularFireAuth) {
     this.user = angularFireAuth.user;
+    angularFireAuth.user.subscribe(this.userBS);
   }
 
   private addDomain(username: string): string {
@@ -24,6 +26,10 @@ export class AuthService {
   getUserInitial(): Observable<string> {
     return this.angularFireAuth.user
       .pipe(map((user: firebase.User) => user.email[0]));
+  }
+
+  getUsername(): string {
+    return this.userBS.getValue().email;
   }
 
   signIn(credentials: Credentials): Promise<firebase.auth.UserCredential> {

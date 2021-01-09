@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { Character } from '../../character/shared/character.model';
 import { DeckService } from '../../deck/shared/deck.service';
 import { Scenario } from './scenario.model';
@@ -13,10 +14,10 @@ import { Scenario } from './scenario.model';
   providedIn: 'root'
 })
 export class ScenarioService {
-  constructor(private angularFirestore: AngularFirestore, private deckService: DeckService, private router: Router) { }
+  constructor(private angularFirestore: AngularFirestore, private deckService: DeckService, private router: Router, private authService: AuthService) { }
 
   private getScenarioCollectionPath(): string {
-    return `id/data/scenarios`;
+    return `${this.authService.getUsername()}/data/scenarios`;
   }
 
   private getScenarioDocPath(scenarioId: string): string {

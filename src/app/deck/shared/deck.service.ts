@@ -4,9 +4,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { CharacterPerks } from '../../character/shared/character-perks.model';
 import { Character } from '../../character/shared/character.model';
-import { CharacterService } from '../../character/shared/character.service';
 import { CardType } from './card-type.model';
 import { DeckState } from './deck-state.model';
 import { Reshuffle } from './reshuffle.model';
@@ -19,10 +19,10 @@ export class DeckService {
 
   deckState: DeckState;
 
-  constructor(private angularFirestore: AngularFirestore, private characterService: CharacterService) { }
+  constructor(private angularFirestore: AngularFirestore, private authService: AuthService) { }
 
   private getDeckDocPath(scenarioId: string, characterName: string): string {
-    return `id/data/scenarios/${scenarioId}/characters/${characterName}`;
+    return `${this.authService.getUsername()}/data/scenarios/${scenarioId}/characters/${characterName}`;
   }
 
   private buildDeck(characterClass: string, activePerks: number[]): string[] {
