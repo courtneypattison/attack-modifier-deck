@@ -1,5 +1,5 @@
 import {
-  ActionReducer, ActionReducerMap, createFeatureSelector, createSelector, MetaReducer
+  ActionReducerMap, createFeatureSelector, createSelector, MetaReducer
 } from '@ngrx/store';
 
 import * as fromAuth from './auth.reducer';
