@@ -11,7 +11,6 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { AuthEffects } from './effects';
 import * as fromAuth from './reducers';
-import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 
 @NgModule({
@@ -25,7 +24,6 @@ import { AuthService } from './services/auth.service';
     EffectsModule.forFeature([AuthEffects]),
   ],
   providers: [
-    AuthGuardService,
     AuthService,
   ]
 })
