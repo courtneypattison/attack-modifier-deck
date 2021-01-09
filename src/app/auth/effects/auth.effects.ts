@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import firebase from 'firebase/app';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -11,7 +12,7 @@ import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthEffects {
-  constructor(private actions$: Actions, private authService: AuthService) {}
+  constructor(private actions$: Actions, private authService: AuthService, private router: Router) {}
 
   signUp$ = createEffect(() =>
     this.actions$.pipe(
@@ -20,6 +21,7 @@ export class AuthEffects {
       exhaustMap((credentials: Credentials) =>
         from(this.authService.signUp(credentials)).pipe(
           map((userCredential: firebase.auth.UserCredential) => AuthActions.signUpSuccess({ username: userCredential.user.email })),
+          tap(() => this.router.navigate(['/scenario'])),
           catchError((error: firebase.auth.Error) => of(AuthActions.signUpFailure({ errorMessage: error.message })))
         )
       )
@@ -33,6 +35,7 @@ export class AuthEffects {
       exhaustMap((credentials: Credentials) =>
         from(this.authService.signIn(credentials)).pipe(
           map((userCredential: firebase.auth.UserCredential) => AuthActions.signInSuccess({ username: userCredential.user.email })),
+          tap(() => this.router.navigate(['/scenario'])),
           catchError((error: firebase.auth.Error) => of(AuthActions.signInFailure({ errorMessage: error.message })))
         )
       )
@@ -45,6 +48,7 @@ export class AuthEffects {
       exhaustMap(() =>
         from(this.authService.signOut()).pipe(
           map(() => AuthActions.signOutSuccess()),
+          tap(() => this.router.navigate(['/signin'])),
           catchError((error: firebase.auth.Error) => of(AuthActions.signOutFailure({ errorMessage: error.message })))
         )
       )
