@@ -1,8 +1,6 @@
 <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
   <h1>Sign up</h1>
 
-  <mat-error *ngIf="errorMessage$ | async">{{errorMessage$ | async}}</mat-error>
-
   <mat-form-field>
     <input matInput formControlName="username" placeholder="Username" value="">
   </mat-form-field>
@@ -12,5 +10,6 @@
   </mat-form-field>
 
   <button mat-raised-button color="primary" [disabled]="!signUpForm.valid">Sign up</button>
-</form>
 
+  <mat-error>{{errorMessage}}</mat-error>
+</form>

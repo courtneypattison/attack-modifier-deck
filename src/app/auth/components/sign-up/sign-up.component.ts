@@ -1,36 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 
-import { select, Store } from '@ngrx/store';
-
-import { signUp } from '../../actions/auth.actions';
-import * as fromAuth from '../../reducers';
+import { AuthService } from "../../services/auth.service";
 
 @Component({
-  selector: 'amd-sign-up',
-  templateUrl: './sign-up.component.html',
+  selector: "amd-sign-up",
+  templateUrl: "./sign-up.component.html",
 })
 export class SignUpComponent implements OnInit {
-  errorMessage$ = this.store.pipe(select(fromAuth.getErrorMessage));
-
+  errorMessage = "";
   signUpForm = this.formBuilder.group({
     username: [null, Validators.required],
-    password: [null, Validators.required]
+    password: [null, Validators.required],
   });
 
-  constructor(private formBuilder: FormBuilder, private store: Store<fromAuth.State>) { }
+  constructor(
+    public authService: AuthService,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   signUp() {
-    this.store.dispatch(
-      signUp({
-        credentials: {
-          username: this.signUpForm.value.username,
-          password: this.signUpForm.value.password,
-        }
+    this.authService
+      .signUp({
+        username: this.signUpForm.value.username,
+        password: this.signUpForm.value.password,
       })
-    );
+      .then(() => this.router.navigate(["/scenario"]))
+      .catch(
+        (error: Error) =>
+          (this.errorMessage = error.message.replace(
+            "email address",
+            "username"
+          ))
+      );
   }
 }

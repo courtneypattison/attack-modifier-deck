@@ -1,29 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable } from "rxjs";
 
-import { signOut } from '../../auth/actions/auth.actions';
-import * as fromAuth from '../../auth/reducers';
-import { AuthService } from '../../auth/services/auth.service';
+import { AuthService } from "../../auth/services/auth.service";
 
 @Component({
-  selector: 'amd-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  selector: "amd-header",
+  templateUrl: "./header.component.html",
+  styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
   userInitial: Observable<string>;
 
-  constructor(public authService: AuthService, private store: Store<fromAuth.State>) { }
+  constructor(public authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.userInitial = this.authService.getUserInitial();
   }
 
   signOut() {
-    this.store.dispatch(
-      signOut()
-    );
+    this.authService.signOut().then(() => this.router.navigate(["/signin"]));
   }
 }
