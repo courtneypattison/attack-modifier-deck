@@ -5,7 +5,7 @@ import firebase from "firebase/app";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
-import { Credentials } from "../models/credentials.model";
+import { Credentials } from "./credentials.model";
 
 @Injectable({
   providedIn: "root",

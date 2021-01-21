@@ -4,7 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { AuthService } from 'src/app/auth/shared/auth.service';
 import { CharacterPerks } from '../../character/shared/character-perks.model';
 import { Character } from '../../character/shared/character.model';
 import { CardType } from './card-type.model';

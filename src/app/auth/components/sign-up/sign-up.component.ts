@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 
-import { AuthService } from "../../services/auth.service";
+import { AuthService } from "../../shared/auth.service";
 
 @Component({
   selector: "amd-sign-up",

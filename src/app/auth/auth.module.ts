@@ -6,7 +6,7 @@ import { SharedModule } from "../shared/shared.module";
 import { AuthRoutingModule } from "./auth-routing.module";
 import { SignInComponent } from "./components/sign-in/sign-in.component";
 import { SignUpComponent } from "./components/sign-up/sign-up.component";
-import { AuthService } from "./services/auth.service";
+import { AuthService } from "./shared/auth.service";
 
 @NgModule({
   declarations: [SignInComponent, SignUpComponent],

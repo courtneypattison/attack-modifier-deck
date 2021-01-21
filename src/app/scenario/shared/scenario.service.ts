@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { AuthService } from 'src/app/auth/shared/auth.service';
 import { Character } from '../../character/shared/character.model';
 import { DeckService } from '../../deck/shared/deck.service';
 import { Scenario } from './scenario.model';
