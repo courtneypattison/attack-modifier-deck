@@ -22,7 +22,7 @@ export class DeckService {
   constructor(private angularFirestore: AngularFirestore, private authService: AuthService) { }
 
   private getDeckDocPath(scenarioId: string, characterName: string): string {
-    return `${this.authService.getUsername()}/data/scenarios/${scenarioId}/characters/${characterName}`;
+    return `/accounts/${this.authService.getUID()}/scenarios/${scenarioId}/characters/${characterName}`;
   }
 
   private buildDeck(characterClass: string, activePerks: number[]): string[] {

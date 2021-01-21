@@ -17,7 +17,7 @@ export class ScenarioService {
   constructor(private angularFirestore: AngularFirestore, private deckService: DeckService, private router: Router, private authService: AuthService) { }
 
   private getScenarioCollectionPath(): string {
-    return `${this.authService.getUsername()}/data/scenarios`;
+    return `/accounts/${this.authService.getUID()}/scenarios`;
   }
 
   private getScenarioDocPath(scenarioId: string): string {

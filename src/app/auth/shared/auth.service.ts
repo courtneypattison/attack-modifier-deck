@@ -30,8 +30,8 @@ export class AuthService {
     );
   }
 
-  getUsername(): string {
-    return this.userBS.getValue().email;
+  getUID(): string {
+    return this.userBS.getValue().uid;
   }
 
   signIn(credentials: Credentials): Promise<firebase.auth.UserCredential> {

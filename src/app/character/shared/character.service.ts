@@ -16,7 +16,7 @@ export class CharacterService {
   constructor(private angularFirestore: AngularFirestore, private authService: AuthService) { }
 
   private getCharacterCollectionPath(): string {
-    return `${this.authService.getUsername()}/data/characters/`;
+    return `/accounts/${this.authService.getUID()}/characters/`;
   }
 
   private getCharacterDocPath(characterId: string): string {
